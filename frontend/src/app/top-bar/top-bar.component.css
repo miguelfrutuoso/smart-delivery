@@ -1,0 +1,64 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background: hsla(171, 100%, 41%, 1);
+    background: linear-gradient(90deg, hsla(171, 100%, 41%, 1) 0%, hsla(212, 100%, 50%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(171, 100%, 41%, 1) 0%, hsla(212, 100%, 50%, 1) 100%); 
+    background: -webkit-linear-gradient(90deg, hsla(171, 100%, 41%, 1) 0%, hsla(212, 100%, 50%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#00D0B2", endColorstr="#0076FF", GradientType=1 );
+    font-family: 'Nunito', sans-serif;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.3);
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+body {
+    margin: 0;
+
+}
+
+.logo {
+    float: left;
+}
+
+#logoimg {
+    width: 150px;
+    -webkit-filter: drop-shadow(1px 1px 1px #222);
+  	filter: drop-shadow(1px 1px 1px #222);
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 70px;
+    margin-top: 21px;
+    position: relative;
+}
+
+nav a {
+    color: #eee;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+nav a:hover{
+    color: #00ff00;
+}
+

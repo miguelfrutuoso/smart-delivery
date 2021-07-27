@@ -1,0 +1,12 @@
+<body>
+    <div id="logincontainer">
+        <img src="../../assets/images/logo.png" alt="logo" id="logo">
+        <form>
+            <p id="login">Login</p>
+            <input  type="email" placeholder="e-mail" class="form__field" [(ngModel)]="user.email" name="login-username"/>
+            <input type="password" placeholder="password" class="form__field" [(ngModel)]="user.password" name="login-password"/>
+            <button class="button" (click)="login()"><span>Login</span></button>
+            <a id="regist" href="/singin">Ainda não está registado? Clique Aqui!</a> 
+        </form>
+    </div> 
+</body>

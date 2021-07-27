@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: inline-block;
+}
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+button {
+    
+}
+
+button {
+	position: relative;
+    left: 40px;
+    top: 40px;
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 9px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2); 
+    color: #6f6cde;
+	border-color: transparent;
+}
+
+button span {
+	line-height: 60px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+button:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+	opacity: 1;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: #79e3b6;
+}
+
+button:focus {outline:0;}
+
+#ButtonContainer {
+    display: inline-block;
+}
+
+#LastOrdersContainer {
+    display: inline-block;
+    position: relative;
+    left: 200px;
+    top: 50px;
+    border-style: solid;
+    border-radius: 7px;
+    width: 600px;
+    padding: 10px;
+    border-width: 2px;
+    border-color: #A3AF9E;
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8), 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#OrderListHeader {
+    font-family: 'Nunito', sans-serif;
+}
+
+#OrderList {
+    font-family: 'Nunito-Light', sans-serif;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 7px;
+}
+th {
+    background-color:#00B4E7;
+    Color:white;
+}
+th, td {
+    width:150px;
+    text-align:center;
+    border:1px solid black;
+    padding:5px
+}
+.geeks {
+    border-right:hidden;
+}
+.geekss {
+    border-bottom: hidden;
+}
+.gfg {
+    border-spacing:0 15px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 4px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 4px;
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 4px;
+}
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 4px;
+}

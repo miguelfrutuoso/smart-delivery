@@ -1,0 +1,112 @@
+p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    color: #535353;
+}
+
+#oops {
+    font-size: 100px;
+    color: #41abd0;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+#st4 {
+    font-size: 400px;
+    color: #41abd0;
+    position: absolute;
+    left: 40%;
+    -webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+    top: 100px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#st0 {
+    font-size: 400px;
+    color: #41abd0;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+    top: 50px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#nd4 {
+    font-size: 400px;
+    color: #41abd0;
+    position: absolute;
+    left: 60%;
+    -webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+    top: 100px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#message {
+    position: absolute;
+    left: 50%;
+    top: 200px;
+    -webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+div {
+    justify-items: center;
+    background: rgb(82,49,143);
+	background: -moz-linear-gradient(90deg, rgba(82,49,143,1) 0%, rgba(9,9,121,1) 30%, rgba(65,171,208,1) 100%);
+	background: -webkit-linear-gradient(90deg, rgba(82,49,143,1) 0%, rgba(9,9,121,1) 30%, rgba(65,171,208,1) 100%);
+	background: linear-gradient(90deg, rgba(82,49,143,1) 0%, rgba(9,9,121,1) 30%, rgba(65,171,208,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#52318f",endColorstr="#41abd0",GradientType=1);
+    position: absolute;
+	display: flex;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0%;
+}
+
+div #wavy {
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+    height: 3000px;
+    width: 900px;
+    background: #fff;
+    left: 50%;
+}
+
+#left{
+    transform: rotate(90deg) translate(0, 500px);	
+}
+#right{
+    transform: rotate(-90deg) translate(0, 500px);	
+}
+
+div #wavy:before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 340px;
+    height: 80px;
+    background-color: white;
+    right: -5px;
+    top: 40px;
+}
+
+div #wavy:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 100% 50%;
+    width: 300px;
+height: 70px;
+background-color: #e0efe3;
+left: 0;
+top: 27px;
+}

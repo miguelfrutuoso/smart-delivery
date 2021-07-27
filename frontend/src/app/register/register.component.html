@@ -1,0 +1,24 @@
+<body>
+
+    
+    <div id="singupcontainer">
+       <img src="../../assets/images/logo.png" alt="logo" id="logo"> 
+        <form>
+            <p id="login">Sing Up</p>
+            <input type="firstname" placeholder="First Name" class="form__field" [(ngModel)]="user.firstname"  name="login-firstname"/>
+            <input type="lastname" placeholder="Last Name" class="form__field" [(ngModel)]="user.lastname" name="login-lastname"/>
+            <input type="username" placeholder="Username" class="form__field" [(ngModel)]="user.user_name"  name="login-username"/>
+            <input type="email" placeholder="E-mail" class="form__field" [(ngModel)]="user.email" name="login-email"/>
+            <input type="password" placeholder="Password" class="form__field" [(ngModel)]="user.password" name="login-password"/>
+            <button class="button" (click)="singin()" ><span>Login</span></button>
+            
+            <select [(ngModel)]="user.gender" name="login-gender">
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Other</option>
+            </select>
+           
+        </form>
+        
+    </div> 
+</body>

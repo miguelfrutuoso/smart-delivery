@@ -1,0 +1,139 @@
+#login {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1cm;
+    text-align: center;
+	color: #41abd0;
+	position: relative;
+	top: 50px;
+}
+
+a {
+	text-decoration: none;
+	font-family: 'Nunito-Light';
+}
+
+a:active {
+	color: #41abd0;
+}
+
+#regist {
+	position: relative;
+	top: 380px;
+}
+
+input {
+	font-family: 'Nunito-Light';
+}
+
+#logincontainer {
+    height: 500px;
+    background-color: rgb(238, 238, 238);
+    width: 400px;
+    margin:0 auto;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	text-align: center;
+	-webkit-box-shadow: 0 0 20px #000;
+    box-shadow: 0 0 20px #000
+}
+
+#logo {
+	position: absolute;
+	left: 50%;
+	top: -150px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	-webkit-filter: drop-shadow(5px 5px 5px #222);
+  	filter: drop-shadow(5px 5px 5px #222);
+}
+
+body {
+	background: hsla(120, 100%, 50%, 1);
+	background: linear-gradient(90deg, hsla(120, 100%, 50%, 1) 0%, hsla(171, 100%, 41%, 1) 49%, hsla(212, 100%, 50%, 1) 100%);
+	background: -moz-linear-gradient(90deg, hsla(120, 100%, 50%, 1) 0%, hsla(171, 100%, 41%, 1) 49%, hsla(212, 100%, 50%, 1) 100%);
+	background: -webkit-linear-gradient(90deg, hsla(120, 100%, 50%, 1) 0%, hsla(171, 100%, 41%, 1) 49%, hsla(212, 100%, 50%, 1) 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#00FF00", endColorstr="#00D0B2", GradientType=1 );
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0%;
+}
+
+input[type=email] {
+	padding:10px;
+	margin:10px 0; 
+	box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border-bottom:1px solid #eee; 
+	padding:10px;
+  	border-radius:10px;
+	margin:0 auto;
+	position: absolute;
+	left: 50%;
+	top: 200px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+input[type=password] {
+	padding:10px;
+	margin:10px 0; 
+	box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border-bottom:1px solid #eee; 
+	padding:10px;
+  	border-radius:10px;
+	margin:0 auto;
+	position: absolute;
+	left: 50%;
+	top: 250px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+button {
+	position: absolute;
+	left: 50%;
+	top: 350px;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 32px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+        6px 6px 10px rgba(0, 0, 0, 0.2);
+      color: #6f6cde;
+	border-color: transparent;
+}
+
+button span {
+	line-height: 60px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+button:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+	opacity: 1;
+        box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+        color: #79e3b6;
+}
+
+button:focus {outline:0;}

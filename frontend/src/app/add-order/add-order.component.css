@@ -1,0 +1,225 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+h3 {
+    font-family: 'Nunito-light', sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+h4 {
+    font-family: 'Nunito-light', sans-serif;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+::placeholder {
+    font-family: 'Nunito-light', sans-serif;
+}
+
+.container {
+    max-width: unset;
+    width: 80%;
+}
+
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+    
+}
+
+
+
+
+
+
+
+.order {
+    float: left;
+    width: 30%;
+    margin-top: 30px;
+    
+}
+
+.form {
+    float: left;
+    width: 30%;
+    margin-top: 30px;
+    
+}
+
+
+
+.order input {
+    margin-bottom: 10px;
+}
+
+.order input[type=checkbox] {
+    margin-top: 15px;
+}
+
+.mapcontainer{
+    float: left;
+    width: 40%;
+    margin-top: 30px;
+}
+
+.selectedlocations {
+    margin-top: 100px;
+    float: left;
+    width: 30%;
+}
+
+.map {
+    height: 500px;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+#datecontainer{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+#datecontainer > button {
+    height: 40px;
+}
+
+#datePicker {
+    width: 50%;
+    float: right;
+}
+
+#deliverydate-text {
+    float: left;
+}
+
+#timecontainer {
+    display: flex;
+    flex-direction: row;
+}
+
+#timecontainer1 {
+    padding-right: 30px;
+}
+
+.calendar {
+    margin-left: 10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.calendar:hover {
+    background-color: #00D0B2;
+}
+
+input {
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+}
+
+select {
+    font-family: 'Nunito-light', sans-serif;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+    background: #f3f0f1;
+    width: 235px;
+    margin-bottom: 10px;
+}
+
+#addLocation {
+	transform: translate(-50%, -50%);
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 32px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #6f6cde;
+	border-color: transparent;
+    position:relative;
+    left: 45%;
+    top: 40px;
+}
+
+#addLocation span {
+	line-height: 40px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+#addLocation:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#addLocation:active {
+	opacity: 1;
+        box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+        color: #79e3b6;
+}
+
+#addLocation:focus {outline:0;}
+
+.location {
+    border-style: solid;
+    border-color: rgb(195, 195, 195);
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 18px;
+    background-color: #f7f7f7;
+    max-width: 400px;
+}
+
+.locationcords {
+    display: flex;
+    flex-direction: row;
+}
+
+.error-message {
+    color: #ff0000;
+}
+
+#errorcontainer {
+    margin-top: 15px;
+}
+
+#checkbox {
+    position: relative;
+    top: -14px;
+    left: 10px;
+}
+
+textarea {
+    outline: none;
+    resize: none;
+    padding: 5px;
+    font-family: 'Nunito-light', sans-serif;
+}
+
+input {
+    outline: none;
+}

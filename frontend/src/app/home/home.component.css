@@ -1,0 +1,117 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+.container {
+    max-width: unset;
+    width: 60%;
+}
+
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+    
+}
+
+#pending-orders{
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px;
+    border-style: solid;
+    border-color: rgb(195, 195, 195);
+    border-radius: 10px;
+    border-width: 1px;
+    background-color: #fbfbfb;
+}
+
+#order {
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(195, 195, 195);
+    border-width: 1px;
+    background-color: #eeeeee;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+#ordertags {
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(195, 195, 195);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-width: 1px;
+    background-color: #00D0B2;
+    padding: 10px;
+    padding: 10px;
+    color: #eeeeee;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+
+#order-id {
+    width: 10%;
+}
+
+#product-description {
+    width: 50%;
+}
+
+#date-available {
+    width: 20%;
+}
+
+.tag {
+    padding-right: 130px;
+}
+
+p {
+    margin: 0px;
+}
+
+#customize-order {
+	transform: translate(0, -50%);
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 32px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #00DF75;
+	border-color: transparent;
+    position:relative;
+    top: 30px;
+    
+}
+
+#customize-order span {
+	line-height: 40px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 20px;
+	font-weight: semibold; 
+	margin: 14px;
+}
+
+#customize-order:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#customize-order:active {
+	opacity: 1;
+        box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+        color: #79e3b6;
+}
+
+#customize-order:focus {outline:0;}
