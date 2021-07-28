@@ -10,7 +10,7 @@ import { Address } from '../models/address'
 import { Order } from '../models/order'
 
 import { GeocodingService } from '../services/geocoding/geocoding.service'
-import { AddOrderAdminService } from '../services/add-order-admin/add-order-admin.service'
+import { OrderService } from '../services/order/order.service'
 import { GetUsersService } from '../services/get-users/get-users.service'
 
 @Component({
@@ -23,7 +23,7 @@ export class AddOrderComponent implements OnInit {
 	constructor(
 		private changeDetection: ChangeDetectorRef, 
 		private geocodingService: GeocodingService,
-		private addOrderAdminService: AddOrderAdminService,
+		private OrderService: OrderService,
 		private getUsersService: GetUsersService,
 		private config: NgbDatepickerConfig) { 
 			
@@ -111,7 +111,7 @@ export class AddOrderComponent implements OnInit {
 		//this.getLocationAddress(-7.429216007254041, 39.28915325077671)
 	}
 
-	async addLocation() {
+	async addLocation() { //TEST VERSION
 		
 		this.timings = [
 			new timing(
@@ -149,8 +149,16 @@ export class AddOrderComponent implements OnInit {
 			}});
 	}
 
+	locationExists(locations: Location[], location: Location) {
+		if (locations != undefined)
+			for(let i of Object.keys(locations))
+				if (locations[i].latitude == location.latitude && locations[i].longitude == location.longitude)
+					return true
+		return false
+	}
+
 	async addOrder() {
-		await this.addOrderAdminService.addOrder(
+		await this.OrderService.addOrder(
 		 	new Order(
 		 		this.customer, 
 		 		this.retailer,
@@ -161,13 +169,6 @@ export class AddOrderComponent implements OnInit {
 		
 	}
 
-	locationExists(locations: Location[], location: Location) {
-		if (locations != undefined)
-			for(let i of Object.keys(locations))
-				if (locations[i].latitude == location.latitude && locations[i].longitude == location.longitude)
-					return true
-		return false
-	}
 
 	async getUsers(){
 		await this.getUsersService.getUsers()

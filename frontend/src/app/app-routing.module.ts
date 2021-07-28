@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute, ParamMap  } from '@angular/router';
 import { LoginComponent } from './login/login.component'
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RegisterComponent } from './register/register.component'
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component'
 import { AddOrderComponent } from './add-order/add-order.component'
 import { HomeComponent } from './home/home.component'
+import { CustomizeOrderComponent } from './customize-order/customize-order.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'add-order', component: AddOrderComponent },
   { path: 'home', component:HomeComponent},
+  { path: 'customize-order', component:CustomizeOrderComponent },
   { path: '**', component: LoginComponent },
 ]
 

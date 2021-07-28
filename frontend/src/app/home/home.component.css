@@ -36,6 +36,7 @@ h1 {
     border-radius: 10px;
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
 }
 
 
@@ -85,7 +86,7 @@ p {
 	text-align: center;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
-	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 3px 3px 7px rgba(0, 0, 0, 0.1);
     color: #00DF75;
 	border-color: transparent;
     position:relative;

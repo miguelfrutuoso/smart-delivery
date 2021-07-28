@@ -1,0 +1,72 @@
+<div class="container">
+
+
+
+    <div class="mapcontainer">
+        <h2>Delivery addresses and timings</h2>
+        <h3>Drag the marker to destiny location</h3>
+        <div class="map" id="map"></div>
+
+        <div id="datecontainer">
+            <h3 id="deliverydate-text">Delivery date</h3>
+            <input class="form-control"
+            id="datePicker"
+            placeholder="yyyy-mm-dd"
+            name="deliveryDate"
+            [(ngModel)]="deliveryDate"
+            ngbDatepicker #d="ngbDatepicker">
+            <button 
+                class="btn btn-outline-secondary calendar"
+                (click)="d.toggle()"
+                type="button">
+                <i id="calendar" class="fa fa-calendar"></i>
+            </button>
+        </div>
+
+        <div id="timecontainer">
+            <div id="timecontainer1" class="timecontainer">
+                <h3>From</h3>
+                <input [ngxTimepicker]="picker" placeholder="hh:mm" id="timepicker1" [format]=24 [(ngModel)]="startTiming">
+                <ngx-material-timepicker #picker></ngx-material-timepicker>
+            </div>
+            <div id="timecontainer2" class="timecontainer">
+                <h3>To</h3>
+                <input [ngxTimepicker]="picker1" placeholder="hh:mm" id="timepicker2" [format]=24 [(ngModel)]="endTiming">
+                <ngx-material-timepicker #picker1></ngx-material-timepicker>
+            </div>
+        </div>
+        
+        <div id="error-container">
+            <h4 class="error-message" *ngIf="startTiming > endTiming">"From" time should be smaller than "To"</h4>
+        </div>
+        
+
+        <button class="button" id="addLocation" (click)="addLocation()"><span>Add location</span></button>
+    </div>
+
+    <!-- <div class="selectedlocations">
+        <h2>Selected locations</h2>
+        <h3 *ngIf="locations.length == 0" >No locations have been added yet</h3>
+        <div *ngFor="let location of locations">
+            <h3>{{location.longitude}}</h3>
+            <h3>{{location.latitude}}</h3>
+        </div>
+        <h3 *ngIf="this.addressString" >{{addressString.features[0].place_name}}</h3>
+    </div> -->
+
+    <div class="selectedlocations">
+        <h2>Selected locations</h2>
+        <!-- <h3 *ngIf="locations.length == 0" >No locations have been added yet</h3> -->
+        <div class="location"> 
+            <div class="locationcords">
+                <h4>longitude: 32.22222</h4>
+                <h4>latitude: 12.22222</h4>
+            </div>
+        
+            <h3>'m learning Angular2 and Typescript. I'm working through the Heroes tutorial on angular.io, but applying it to a project I'm converting from ASP.Net </h3>
+        </div>
+        <h3 *ngIf="this.addressString" >{{addressString.features[0].place_name}}</h3>
+        
+    </div>
+
+</div>

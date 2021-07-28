@@ -23,17 +23,16 @@ class OrderSerializer(serializers.ModelSerializer):
 
         return order
 
-    # def create(self, validated_data):
-    #     timelocations_data = validated_data.pop('ordertimelocation')
-    #     order = Order.objects.create(**validated_data)
+    def update(self, instance, validated_data):
         
-    #     for timelocation_data in timelocations_data:
-    #         time_intervals_data = validated_data.pop('time_interval')
-    #    #     order_time_location_serializer = orderTimelocationSerializer(data=timelocation_data)
-    #    #    order_time_location_serializer.is_valid(raise_exception=True)
-    #    #     order_time_location = order_time_location_serializer.save()
-    #    #     order_time_location.order = order
-    #    #     order_time_location.save()
+        timelocations_data = validated_data.pop('ordertimelocation')
+        ordertimelocation = instance.ordertimelocation
 
-      
-    #     return order
+        for timelocation_data in timelocations_data:
+            order_time_location_serializer = orderTimelocationSerializer(data=timelocation_data)
+            order_time_location_serializer.is_valid(raise_exception=True)
+            order_time_location = order_time_location_serializer.save()
+            order_time_location.order = instance
+            order_time_location.save()
+
+        return instance

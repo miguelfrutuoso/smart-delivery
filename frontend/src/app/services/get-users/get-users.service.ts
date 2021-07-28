@@ -9,13 +9,20 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class GetUsersService {
 
-  readonly URL = environment.apiUrl + "user/allUsers/"
+  readonly URL = environment.apiUrl + "user/"
 
   constructor(private http: HttpClient) { }
 
 
   getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.URL)
+    return this.http.get<User[]>(this.URL + "allUsers/")
+    .pipe(
+			tap(_ => console.log("Service called"))
+		)
+  }
+
+  getUserDetail(id: number): Observable<User>{
+    return this.http.get<User>(this.URL + "userDetail/" + id)
     .pipe(
 			tap(_ => console.log("Service called"))
 		)

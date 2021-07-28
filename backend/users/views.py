@@ -7,6 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics
 from .models import User
+from django.shortcuts import render, get_object_or_404
 
 class CustomUserCreate(APIView):
     permission_classes = [AllowAny] #when a user create an account he isn't autenticated
@@ -24,3 +25,11 @@ class ListUsers(generics.ListAPIView):
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+class UserDetail(generics.RetrieveAPIView):
+
+    serializer_class = UserSerializer
+
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('id')
+        return get_object_or_404(User, id=item)

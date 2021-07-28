@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="order">
+        <h1>Order details</h1>
+        <p>order {{id}}</p>
+        <div class="order-detail">
+            
+            <p>{{retailer.user_name}}</p>
+        </div>
+        <div class="order-detail">
+            <h3>Description</h3>
+            <p>{{order.description}}</p>
+        </div>
+        
+        <div class="order-detail">
+            <h3>Date</h3>
+            <p>{{order.date_available}}</p>
+        </div>
+        
+        <button class="button" id="updateOrder" (click)="updateOrder()"><span>Place Order</span></button>
+    </div>
+    
+    <app-location-time-picker></app-location-time-picker>
+</div>
+
+
+

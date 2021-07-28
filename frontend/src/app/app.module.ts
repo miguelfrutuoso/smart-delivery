@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
+import { CustomizeOrderComponent } from './customize-order/customize-order.component';
+import { LocationTimePickerComponent } from './location-time-picker/location-time-picker.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { HomeComponent } from './home/home.component';
     AdminDashboardComponent,
     TopBarComponent,
     AddOrderComponent,
-    HomeComponent
+    HomeComponent,
+    CustomizeOrderComponent,
+    LocationTimePickerComponent,
   ],
   imports: [
     BrowserModule,
