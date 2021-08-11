@@ -8,7 +8,7 @@ class orderTimelocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = orderTimelocation
-        fields = ('longitude', 'latitude', 'time_interval')
+        fields = ('longitude', 'latitude', 'time_interval', 'selected')
 
 
     def create(self, validated_data):

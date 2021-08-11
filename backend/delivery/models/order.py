@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from .route import Route
 import datetime
 
 class Order(models.Model):
@@ -10,4 +11,4 @@ class Order(models.Model):
     date_available = models.DateField()
     weight = models.DecimalField(decimal_places=2, max_digits=5)
     description = models.CharField(max_length=500, null=True)
-    
+    route = models.ForeignKey(Route, related_name='orders', related_query_name="orders", null=True, on_delete=models.CASCADE)

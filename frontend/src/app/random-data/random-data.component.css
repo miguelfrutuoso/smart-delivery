@@ -1,0 +1,84 @@
+.container {
+    max-width: unset;
+    width: 90%;
+    margin-top: 40px;
+}
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+input {
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.form {
+    float: left;
+    width: 30%;
+}
+
+#datecontainer{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.calendar {
+    margin-left: 10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.calendar:hover {
+    background-color: #00D0B2;
+}
+
+#datecontainer > button {
+    height: 40px;
+}
+
+#create {
+	transform: translate(-50%, -50%);
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 32px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #6f6cde;
+	border-color: transparent;
+    position:relative;
+    left: 40%;
+    top: 40px;
+}
+
+#create span {
+	line-height: 40px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+#create:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#create:active {
+	opacity: 1;
+        box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+        color: #79e3b6;
+}
+
+#create:focus {outline:0;}

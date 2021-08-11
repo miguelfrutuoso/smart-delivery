@@ -6,9 +6,10 @@ from .time_interval_serializer import timeIntervalSerializer
 class OrderSerializer(serializers.ModelSerializer):
     ordertimelocation = orderTimelocationSerializer(many=True)
 
+
     class Meta:
         model = Order
-        fields = ['customer', 'retailer', 'date_available', 'weight', 'description', 'ordertimelocation']
+        fields = ['id', 'customer', 'retailer', 'date_available', 'weight', 'description', 'ordertimelocation']
 
     def create(self, validated_data):
         timelocations_data = validated_data.pop('ordertimelocation')

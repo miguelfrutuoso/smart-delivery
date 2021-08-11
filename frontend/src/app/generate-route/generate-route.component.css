@@ -1,0 +1,178 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+h3 {
+    font-family: 'Nunito-light', sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+h4 {
+    font-family: 'Nunito-light', sans-serif;
+    font-size: 17px;
+    margin-right: 20px;
+}
+
+::placeholder {
+    font-family: 'Nunito-light', sans-serif;
+}
+
+.container {
+    max-width: unset;
+    width: 80%;
+}
+
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+    
+}
+
+.route {
+    float: left;
+    width: 30%;
+    margin-top: 30px;
+    
+}
+
+.orders {
+    float: left;
+    width: 40%;
+    margin-top: 30px;
+    
+}
+
+.form {
+    float: left;
+    width: 30%;
+    margin-top: 30px;
+    
+}
+
+
+.route input {
+    margin-bottom: 10px;
+}
+
+
+
+#datecontainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+#datecontainer > button {
+    height: 40px;
+}
+
+#datePicker {
+    width: 50%;
+    float: right;
+}
+
+.calendar {
+    margin-left: 10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.calendar:hover {
+    background-color: #00D0B2;
+}
+
+input {
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+}
+
+input {
+    outline: none;
+}
+
+select {
+    font-family: 'Nunito-light', sans-serif;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+    background: #f3f0f1;
+    width: 235px;
+    margin-bottom: 10px;
+}
+
+.search {
+    width: 250px;
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 9px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2); 
+    color: #6f6cde;
+	border-color: transparent;
+}
+
+.search span {
+	line-height: 60px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+.search:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search:active {
+	opacity: 1;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: #79e3b6;
+}
+
+.search:focus {outline:0;}
+
+.search:disabled {
+    color: #aaa9c5;
+}
+
+#order {
+    width: 100%;
+    border-style: solid;
+    border-color: rgb(195, 195, 195);
+    border-width: 1px;
+    background-color: #eeeeee;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    height: fit-content;
+}
+
+#order p {
+    margin: 0;
+}
+
+#order-id {
+    width: 15%;
+}

@@ -19,6 +19,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 import { CustomizeOrderComponent } from './customize-order/customize-order.component';
 import { LocationTimePickerComponent } from './location-time-picker/location-time-picker.component';
+import { GenerateRouteComponent } from './generate-route/generate-route.component';
+import { RandomDataComponent } from './random-data/random-data.component';
+import { DevToolsComponent } from './dev-tools/dev-tools.component';
+import { RouteComponent } from './route/route.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { LocationTimePickerComponent } from './location-time-picker/location-tim
     HomeComponent,
     CustomizeOrderComponent,
     LocationTimePickerComponent,
+    GenerateRouteComponent,
+    RandomDataComponent,
+    DevToolsComponent,
+    RouteComponent,
   ],
   imports: [
     BrowserModule,

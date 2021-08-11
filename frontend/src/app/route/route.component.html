@@ -1,0 +1,32 @@
+<div class="container">
+    
+    <h1>Route - day {{route.day}}</h1>
+
+    <div id="route">
+
+
+        <div class="location">
+            <embed class="location-svg" src="../../assets/route-elements/route-order.svg" alt="">
+            <div class="location-info">
+                <p>Warehouse</p>
+            </div>
+            
+        </div>
+
+        <div class="location" *ngFor="let order of ordersAddresses">
+            <embed class="location-svg" src="../../assets/route-elements/route-order.svg" alt="">
+            <div class="location-info">
+                <p>{{order}}</p>
+            </div>
+            
+        </div>
+        <div class="location">
+            <embed id="last" class="location-svg" src="../../assets/route-elements/route-last.svg" alt="">
+            <div class="location-info">
+                <p>Warehouse</p>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

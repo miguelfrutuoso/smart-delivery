@@ -1,0 +1,41 @@
+.container {
+    max-width: unset;
+    width: 90%;
+    margin-top: 40px;
+}
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+p {
+    font-family: 'Nunito-Light', sans-serif;
+
+}
+
+#route{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.location {
+    float: left;
+    width: 40%;
+    height: 155px;
+    display: flex;
+    flex-direction: row;
+}
+
+.location-svg{
+    height: 160px;
+}
+
+.location-info{
+    padding: 15px;
+}
+
+#last {
+    height: 60px;
+}

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	async getOrders() {
-		await this.orderService.getOrders(1)
+		await this.orderService.getOrders(1) // TODO mudar para user logged
 			.subscribe(orders => this.orders = orders)
 		
 	}

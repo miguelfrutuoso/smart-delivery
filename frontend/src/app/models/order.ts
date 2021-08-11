@@ -1,6 +1,7 @@
 import { Location } from './location'
 
 export class Order {
+    id: number;
     customer: number;
     retailer: number;
     date_available: string;

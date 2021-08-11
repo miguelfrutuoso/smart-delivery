@@ -3,7 +3,8 @@ body {
 }
 
 .container {
-    display: inline-block;
+    max-width: unset;
+    width: 90%;
 }
 
 h1 {
@@ -11,14 +12,9 @@ h1 {
     color: #00D0B2;
 }
 
-button {
-    
-}
 
 button {
-	position: relative;
-    left: 40px;
-    top: 40px;
+    width: 250px;
 	background: #f3f0f1;
     margin-bottom: 25px;
     border-radius: 9px;
@@ -53,17 +49,30 @@ button:active {
 button:focus {outline:0;}
 
 #ButtonContainer {
-    display: inline-block;
+    margin-top: 35px;
+    float: left;
+    width: 20%;
 }
 
 #LastOrdersContainer {
-    display: inline-block;
-    position: relative;
-    left: 200px;
-    top: 50px;
+    float: left;
+    width: 35%;
+    margin-top: 40px;
     border-style: solid;
     border-radius: 7px;
-    width: 600px;
+    padding: 10px;
+    border-width: 2px;
+    border-color: #A3AF9E;
+    box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.8), 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#routes {
+    float: left;
+    width: 40%;
+    margin-top: 40px;
+    margin-left: 20px;
+    border-style: solid;
+    border-radius: 7px;
     padding: 10px;
     border-width: 2px;
     border-color: #A3AF9E;
@@ -78,7 +87,11 @@ button:focus {outline:0;}
     font-family: 'Nunito-Light', sans-serif;
 }
 
+
+
 table {
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 7px;

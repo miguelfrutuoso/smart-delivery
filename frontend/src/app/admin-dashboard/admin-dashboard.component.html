@@ -1,7 +1,8 @@
 <body>
     <div class="container">
         <div id="ButtonContainer">
-            <button onclick="location.href='/add-order'"><span>Criar encomenda</span></button>
+            <button onclick="location.href='/add-order'"><span>Create order</span></button>
+            <button onclick="location.href='/generate-route'"><span>Generate route</span></button>
         </div>
         <div id="LastOrdersContainer">
             <h1>Last orders</h1>
@@ -48,6 +49,20 @@
             </table>
             
         </div> 
+        <div id="routes">
+            <h1>Routes</h1>
+            <p *ngIf="!routes">No routes added yet</p>
+
+            <div id="order" *ngFor="let route of routes">
+                <div id="route-day">
+                    <p>{{route.day}}</p>
+                </div>
+                <div id="product-description">
+                    
+                </div>
+                
+            </div>
+        </div>
     </div>
     
     

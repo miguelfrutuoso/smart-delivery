@@ -7,6 +7,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AddOrderComponent } from './add-order/add-order.component'
 import { HomeComponent } from './home/home.component'
 import { CustomizeOrderComponent } from './customize-order/customize-order.component'
+import { GenerateRouteComponent } from './generate-route/generate-route.component'
+import { DevToolsComponent } from './dev-tools/dev-tools.component'
+import { RandomDataComponent } from './random-data/random-data.component'
+import { RouteComponent } from './route/route.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +20,10 @@ const routes: Routes = [
   { path: 'add-order', component: AddOrderComponent },
   { path: 'home', component:HomeComponent},
   { path: 'customize-order', component:CustomizeOrderComponent },
+  { path: 'generate-route', component:GenerateRouteComponent},
+  { path: 'dev-tools', component:DevToolsComponent},
+  { path: 'random-data', component:RandomDataComponent},
+  { path: 'route', component:RouteComponent},
   { path: '**', component: LoginComponent },
 ]
 

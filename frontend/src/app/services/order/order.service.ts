@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { Order } from '../../models/order'
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
 	providedIn: 'root'
@@ -31,9 +32,6 @@ export class OrderService {
 
 
 	addOrder(order: Order): Observable<Order> {
-		console.log("Order service called")
-		console.log(order)
-		console.log("Order service called")
 		return this.http.post<Order>(this.URL + "create/", order, this.httpOptions)
 			.pipe(
 				catchError(this.handleError('addOrder', order))
@@ -55,14 +53,42 @@ export class OrderService {
 		)
 	}
 
+	getOrdersByIDs(orders: Order[]): Observable<Order[]> {
+
+		var ordersString = '?';
+
+		for (let order of orders){
+			ordersString += 'order=' + order.id
+		}
+		console.log(ordersString)
+		return this.http.get<Order[]>(this.URL + ordersString)
+		.pipe(
+			tap(_ => console.log("Service called"))
+		)
+	}
+
 	updateOrder(orderID: number, newOrder: Order): Observable<Order> {
-		console.log(this.URL + "update/" + orderID)
-		console.log(newOrder)
 		return this.http.put<Order>(this.URL + "update/" + orderID, newOrder, this.httpOptions)
 		.pipe(
 			tap(_ => console.log("Service called"))
 		)
 	}
 
+	getOrdersByRangeTime(radius: number, warehouseID: number, date: NgbDate): Observable<Order[]>{
+		return this.http.get<Order[]>(
+			this.URL + "filterRangeTime/" + 
+			this.dateToStringWithZeros(date) + '/' +
+			warehouseID + '/' +
+			radius)
+			.pipe(
+				tap(_ => console.log("Service called"))
+			)
+	}
+
+	dateToStringWithZeros(date: NgbDate){
+		var zero = ""
+		if (date.month < 10) zero = "0"
+		return (date.year + '-' + zero + date.month + '-' + date.day) 		
+	}
 }
 

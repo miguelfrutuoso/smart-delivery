@@ -1,0 +1,31 @@
+<div class="container">
+
+    <h1>Generate random order data</h1>
+
+    <div class="form">
+        <div>
+            <input type="text" placeholder="Number of orders" name="orderNumber" [(ngModel)]="orderNumber">
+        </div>
+    
+        <div id="datecontainer">
+            <input class="form-control"
+            id="datePicker"
+            placeholder="Distribution date"
+            name="appoitmentTime"
+            [(ngModel)]="dataDay"
+            ngbDatepicker #e="ngbDatepicker">
+            <button 
+                class="btn btn-outline-secondary calendar"
+                (click)="e.toggle()"
+                type="button">
+                <i id="calendar" class="fa fa-calendar"></i>
+            </button>
+        </div>
+
+        <button id="create" (click)="createRandomOrders()"><span>Create random orders</span></button>
+    </div>
+
+        
+  
+    
+</div>

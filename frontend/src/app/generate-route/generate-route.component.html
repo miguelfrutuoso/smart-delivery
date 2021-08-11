@@ -1,0 +1,56 @@
+
+
+<div class="container">
+
+    <div class="route">
+
+        <h1>Generate route</h1>
+        <form>
+            <div id="datecontainer">
+            
+                <input class="form-control"
+                id="datePicker"
+                placeholder="Route day (yyyy-mm-dd)"
+                name="deliveryDate"
+                [(ngModel)]="deliveryDate"
+                ngbDatepicker #d="ngbDatepicker">
+                <button 
+                    class="btn btn-outline-secondary calendar"
+                    (click)="d.toggle()"
+                    type="button">
+                    <i id="calendar" class="fa fa-calendar"></i>
+                </button>
+            </div>
+    
+            <div>
+                <select [(ngModel)]="selectedWarehouse" required name="selectedWarehouse">
+                    <option value="" disabled selected>Select warehouse</option>
+                    <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>      
+                </select>
+            </div>
+            <div>
+                <input type="text" id="distance-radius" placeholder="distance radius" type="radius" [(ngModel)]="radius" name="radius">
+            </div>
+
+            <button class="search" id="updateOrder" (click)="getOrders()"><span>Search orders</span></button>
+            <button class="search" id="updateOrder" (click)="getOrders()" disabled><span>Generate route</span></button> 
+        </form>
+
+    </div>
+
+    <div class="orders">
+        <h1>Orders</h1>
+        <h3 *ngIf="!this.orders">There are no orders for selected day and location</h3>
+        <div id="order" *ngFor="let order of orders">
+            <div id="order-id">
+                 <p>{{order.id}}</p> 
+            </div>
+            <div id="product-description">
+                <p>{{order.description}}</p>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

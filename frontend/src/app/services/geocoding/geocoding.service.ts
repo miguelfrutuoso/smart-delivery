@@ -30,7 +30,7 @@ export class GeocodingService {
 			'.json?limit=' + this.limit +
 			'&access_token=' + environment.access_token
 		).pipe(
-			tap(_ => console.log("Service called"))
+			tap(_ => console.log("Geocoding service called"))
 		)
 	}
 }

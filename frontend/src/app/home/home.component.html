@@ -5,25 +5,20 @@
         
         <div id="order" *ngFor="let order of orders">
             <div id="order-id">
-                <p>11111</p>
+                <p>{{order.id}}</p>
             </div>
-            
             <div id="product-description">
-                <p>Product description</p>
+                <p>{{order.description}}</p>
             </div>
             <div id="date-available">
                 <p>Available since:</p>
-                <p>{{order.date_available}}</p>
-                
+                <p>{{order.date_available}}</p>    
             </div>
             <div id="buttons">
                 <button class="button" id="customize-order" ><span>Customize order</span></button>
             </div>
-            
         </div>
     </div>
-
-    
 
 </div>
 

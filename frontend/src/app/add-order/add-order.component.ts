@@ -123,8 +123,8 @@ export class AddOrderComponent implements OnInit {
 
 		
 		this.location = new Location(
-			39.28915325077671,
 			-7.429216007254041,
+			39.28915325077671,
 			this.timings
 		)
 		
@@ -176,11 +176,11 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	dateToString(date: NgbDate,){
-		return (date.year + '-' + (date.month - 1) + '-' + date.day)
+		return (date.year + '-' + date.month + '-' + date.day)
 	}
 
 	datetimeToString(date: NgbDate, time: Time){
-		return (date.year + '-' + (date.month - 1) + '-' + date.day + ' ' + time)
+		return (date.year + '-' + date.month + '-' + date.day + ' ' + time)
 	}
 }
 
