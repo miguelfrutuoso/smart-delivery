@@ -8,4 +8,8 @@ export class User {
     firstname: string;
     lastname: string;
     gender: Gender;
+    is_admin: boolean;
+    is_retailer: Boolean;
+
+    
 }

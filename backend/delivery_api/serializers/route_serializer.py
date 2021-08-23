@@ -8,7 +8,7 @@ class routeSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Route
-        fields = ['day', 'warehouse', 'start_time', 'orders']
+        fields = ['id', 'day', 'warehouse', 'start_time', 'orders']
 
 
     def create(self, validated_data):

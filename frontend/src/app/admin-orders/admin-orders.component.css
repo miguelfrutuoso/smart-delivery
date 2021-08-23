@@ -1,0 +1,130 @@
+h3 {
+    font-family: 'Nunito-light', sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.container {
+    max-width: unset;
+    width: 50%;
+}
+
+#orders-container {
+    margin-top: 35px;
+    float: left;
+    width: 100%;
+}
+
+.table-header {
+    font-family: 'Nunito', sans-serif;
+    background-color:#00b5e7b0;
+    color: white;
+    border: 1px solid #7980818c;
+    margin-bottom: 5px;
+}
+
+.order{
+    width: 20%;
+}
+
+
+table {
+    width: 100%;
+}
+
+th{
+    padding: 10px 15px; 
+    text-align: left;
+    text-transform: uppercase;  
+}
+
+td {
+    padding: 15px;
+    vertical-align:middle;
+    border: 1px solid #a4a9aa57;
+}
+
+#table-list tr td:first-child a{
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
+    margin-left: 20px;
+}
+
+#table-list tr td:first-child:hover a{
+    opacity: 1;
+}
+
+.date-filters {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row; 
+}
+
+#datecontainer{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+#datePicker {
+    width: 50%;
+    float: right;
+}
+
+select {
+    font-family: 'Nunito-light', sans-serif;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+    background: #f3f0f1;
+    width: 235px;
+    margin-bottom: 10px;
+}
+
+.orderby-filter {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+
+#filter {
+    width: 150px;
+	background: #f3f0f1;
+    margin-bottom: 20px;
+    border-radius: 30px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2); 
+    color: #6f6cde;
+	border-color: transparent;
+    margin-left: 30px;
+}
+
+#filter span {
+	line-height: 35px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 5px;
+}
+
+#filter:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#filter:active {
+	opacity: 1;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: #79e3b6;
+}
+
+#filter:focus {outline:0;}

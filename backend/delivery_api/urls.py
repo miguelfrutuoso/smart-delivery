@@ -1,7 +1,7 @@
 from django.urls import path, include, register_converter, re_path
-from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs
+from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders 
 from .views.warehouse_views import GetWarehouses, CreateWarehouse, GetWarehouseByID
-from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails
+from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails, GetNLastRoutes, GetFilteredRoutes
 from datetime import datetime
 
 app_name = 'delivery_api'
@@ -18,14 +18,15 @@ class DateConverter:
 register_converter(DateConverter, 'yyyy')
 
 order_patterns = ([
+    path('all/', GetAllOrders.as_view(), name='getallorders'),
     path('create/', CreateOrder.as_view(), name='createorder'),
     path('user/<int:us>', GetOrders.as_view(), name='getorders'),
     path('<int:order>', GetOrder.as_view(), name='getorder'),
     path('update/<int:pk>', UpdateOrder.as_view(), name='UpdateOrder'),
     path('filterRangeTime/<yyyy:date>/<int:warehouse>/<int:range>', GetOrdersByRangeTime.as_view(), name='Test'),
-    #re_path(r'^ids/^P<year>\d+(,\d+)*$', GetOrdersByIDs.as_view(), name='getordersbyids')
-    #re_path(r'^ids/^P<year>\d+(,\d+)*$', GetOrdersByIDs, name='getordersbyids')
-    path('ids/', GetOrdersByIDs, name='getordersbyids')
+    path('ids/', GetOrdersByIDs, name='getordersbyids'),
+    path('lastorders/<int:n>', GetNLastOrders.as_view(), name='lastnorders'),
+    path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredOrders.as_view(), name='filteredorders')
 ], 'order')
 
 warehouse_patterns = ([
@@ -38,7 +39,9 @@ route_patterns = ([
     path('', GetRoutes.as_view(), name='getroutes'),
     path('create/', CreateRoute.as_view(), name='createroute'),
     path('createManual/', CreateManualRoute.as_view(), name='createmanualroute'),
-    path('<int:route>', GetRouteWithDetails.as_view(), name='getroute')
+    path('<int:route>', GetRouteWithDetails.as_view(), name='getroute'),
+    path('lastroutes/<int:n>', GetNLastRoutes.as_view(), name='lastnorders'),
+    path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredRoutes.as_view(), name='filteredroutes')
 ], 'route')
 
 urlpatterns = [

@@ -13,13 +13,51 @@ from django.http import HttpResponse
 import io
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 
 class CreateOrder(generics.CreateAPIView):
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
+class GetAllOrders(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+class GetNLastOrders(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        n = self.kwargs.get('n')
+        return Order.objects.filter(date_available__gte = datetime.date.today()).order_by('date_available')[:n]
+
+class GetFilteredOrders(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        options = ['id', 'date_available', '-date_available']
+        date_min = self.kwargs.get('date_min')
+        print(date_min)
+        date_max = self.kwargs.get('date_max')
+        by = self.kwargs.get('by')
+        return Order.objects.filter(date_available__gte = date_min, date_available__lte = date_max).order_by(options[by])
+
+
 class GetOrders(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
 
     serializer_class = OrderSerializer
 
@@ -28,36 +66,23 @@ class GetOrders(generics.ListAPIView):
         return Order.objects.filter(customer_id=us) #TODO ALTERAR PARA USER LOGGED https://www.django-rest-framework.org/api-guide/filtering/#filtering-against-the-current-user
 
 def GetOrdersByIDs(request):
-    
-    print("ola")
-    ids = request.GET.getlist('order')
-    
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
 
+
+    ids = request.GET.getlist('order')
     objects = Order.objects.filter(id__in=ids)
-    
-    print(objects)
-    
     serializer = OrderSerializer(data=objects, many=True)
     serializer.is_valid()
     json = JSONRenderer().render(serializer.data)
     stream = io.BytesIO(json)
     data = JSONParser().parse(stream)
-    print(data)
 
     return HttpResponse(data)
 
-#class GetOrdersByIDs(generics.ListAPIView):
-
-    #serializer_class = OrderSerializer
-
-    #request.GET.getlist('myvar')
-
-    # def get_queryset(self):
-    #     print(self)
-    #     ids = self.kwargs.get('ids')
-    #     return Order.objects.filter(id__in=ids)
-
 class GetOrder(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
 
     serializer_class = OrderSerializer
 
@@ -66,11 +91,15 @@ class GetOrder(generics.RetrieveAPIView):
         return get_object_or_404(Order, id=item)
     
 class UpdateOrder(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
 
     serializer_class = OrderSerializer
     queryset = Order.objects.all()
 
 class GetOrdersByRangeTime(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
 
     serializer_class = OrderSerializer
         
@@ -102,7 +131,7 @@ class GetOrdersByRangeTime(generics.ListAPIView):
         return orders
     
     
-def inRange(lon1, lat1, lon2, lat2, range): #Check if 2 locations(longitude, latitude) are less than 'range' meters apart 
+def inRange(lon1, lat1, lon2, lat2, range): # Check if 2 locations(longitude, latitude) are less than 'range' meters apart 
 
         R = 6371e3; #meters
         φ1 = lat1 * Decimal(pi/180);

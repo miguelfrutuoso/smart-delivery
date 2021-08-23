@@ -7,53 +7,73 @@
         <div id="LastOrdersContainer">
             <h1>Last orders</h1>
 
-            <table class="gfg" id="OrderListHeader">
-                <tr>
-                    <th class = "geeks">Order ID</th>
-                    <th class = "geeks">Status</th>
-                    <th class = "geeks">Destino</th>
-                    <th>User</th>
-                </tr>
-            </table>
-            <table id="OrderList">
-                <tr class = "geekss" >
-                    <td class = "geeks">10001</td>
-                    <td class = "geeks">Thomas</td>
-                    <td class = "geeks">M</td>
-                    <td >32</td>
-                </tr>
-                <tr class = "geekss">
-                    <td class = "geeks">10002</td>
-                    <td class = "geeks">Sally</td>
-                    <td class = "geeks">F</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td class = "geeks">10003</td>
-                    <td class = "geeks">Anthony</td>
-                    <td class = "geeks">M</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td class = "geeks">10003</td>
-                    <td class = "geeks">Anthony</td>
-                    <td class = "geeks">M</td>
-                    <td>24</td>
-                </tr><tr>
-                    <td class = "geeks">10003</td>
-                    <td class = "geeks">Anthony</td>
-                    <td class = "geeks">M</td>
-                    <td>24</td>
-                </tr>
-                
-            </table>
+            <div class="table-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="order">Order ID</th>
+                            <th class="order">Status</th>
+                            <th class="order">Retailer</th>
+                            <th class="order">User</th>
+                        </tr>
+                    </thead>  
+                </table>
+            </div>
             
+            <div class="table-content">
+
+                <table id="table-list">
+                    <tbody>
+                        <tr *ngFor="let order of orders" >
+                            <td class="order order-id">{{order.id}} <a href="/customize-order?id={{order.id}}" id="order-details">details</a> </td>
+                            <td class="order">Estado</td>
+                            <td class="order">{{order.retailer}}</td>
+                            <td class="order">{{order.customer}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="more">
+                <a href="/admin-orders">Show more</a> 
+            </div>
+               
         </div> 
+
         <div id="routes">
             <h1>Routes</h1>
             <p *ngIf="!routes">No routes added yet</p>
 
-            <div id="order" *ngFor="let route of routes">
+            <div class="table-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="route">Route ID</th>
+                            <th class="route">Warehouse</th>
+                            <th class="route">Day</th>
+                            <th class="route">Start time</th>
+                        </tr>
+                    </thead>  
+                </table>
+            </div>
+
+            <div class="table-content">
+                <table id="table-list">
+                    <tbody>
+                        <tr *ngFor="let route of routes">
+                            <td class="route">{{route.id}} <a href="/route?id={{route.id}}" >details</a></td>
+                            <td class="route">{{route.warehouse}}</td>
+                            <td class="route">{{route.day}}</td>
+                            <td class="route">{{route.start_time}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="more">
+                <a href="/admin-routes">Show more</a> 
+            </div>
+            <!-- <div id="order" *ngFor="let route of routes">
                 <div id="route-day">
                     <p>{{route.day}}</p>
                 </div>
@@ -61,7 +81,7 @@
                     
                 </div>
                 
-            </div>
+            </div> -->
         </div>
     </div>
     

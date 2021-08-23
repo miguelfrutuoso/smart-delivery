@@ -169,7 +169,6 @@ export class AddOrderComponent implements OnInit {
 		
 	}
 
-
 	async getUsers(){
 		await this.getUsersService.getUsers()
 			.subscribe(users => this.users = users)

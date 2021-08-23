@@ -43,10 +43,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     start_date = models.DateTimeField(default=timezone.now)
-    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     is_retailer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    gender = models.IntegerField(choices=GENDER_CHOICES)
+    gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
 
     objects = UserManager()
 
@@ -57,4 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.user_name
     
     def isretailer(self):
+        return self.is_retailer
+
+    def isadmin(self):
         return self.is_retailer

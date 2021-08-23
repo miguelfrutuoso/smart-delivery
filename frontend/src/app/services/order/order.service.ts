@@ -38,7 +38,14 @@ export class OrderService {
 			);
 	}
 
+	getAllOrders(): Observable<Order[]> {
+		return this.http.get<Order[]>(this.URL + 'all/')
+	}
 	
+	getNLastOrders(n: number): Observable<Order[]> {
+		return this.http.get<Order[]>(this.URL + 'lastorders/' + n)
+	}
+
 	getOrders(user: number): Observable<Order[]> {
 		return this.http.get<Order[]>(this.URL + "user/" + user)
 		.pipe(
@@ -85,10 +92,19 @@ export class OrderService {
 			)
 	}
 
+	getFilteredOrders(date_min: NgbDate, date_max: NgbDate, by: number): Observable<Order[]> {
+		return this.http.get<Order[]>(this.URL + 'filter/' + 
+		this.dateToStringWithZeros(date_min) + '/' + 
+		this.dateToStringWithZeros(date_max) + '/' + 
+		by)
+	}
+
 	dateToStringWithZeros(date: NgbDate){
 		var zero = ""
+		var day_zero = ""
 		if (date.month < 10) zero = "0"
-		return (date.year + '-' + zero + date.month + '-' + date.day) 		
+		if (date.day < 10) day_zero = "0"
+		return (date.year + '-' + zero + date.month + '-' + date.day + day_zero)  		
 	}
 }
 

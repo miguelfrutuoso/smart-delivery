@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="filters">
+
+        <div class="date-filters">
+            <div id="datecontainer">
+                <h3 id="deliverydate-text">Min date</h3>
+                <input class="form-control"
+                id="datePicker"
+                placeholder="yyyy-mm-dd"
+                name="deliveryDate"
+                [(ngModel)]="minDate"
+                ngbDatepicker #d="ngbDatepicker">
+                <button 
+                    class="btn btn-outline-secondary calendar"
+                    (click)="d.toggle()"
+                    type="button">
+                    <i id="calendar" class="fa fa-calendar"></i>
+                </button>
+            </div>
+    
+            <div id="datecontainer">
+                <h3 id="deliverydate-text">Max date</h3>
+                <input class="form-control"
+                id="datePicker"
+                placeholder="yyyy-mm-dd"
+                name="deliveryDate"
+                [(ngModel)]="maxDate"
+                ngbDatepicker #e="ngbDatepicker">
+                <button 
+                    class="btn btn-outline-secondary calendar"
+                    (click)="e.toggle()"
+                    type="button">
+                    <i id="calendar" class="fa fa-calendar"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="orderby-filter">
+            <h3>Order By</h3>
+            <div>
+                <select [(ngModel)]="orderbyvalue" required name="retailer">
+                    <option *ngFor="let option of orderby" [value]="option.value">{{option.name}}</option>      
+                </select>
+            </div>
+            <button id="filter" (click)="getFilteredRoutes()"><span>Filter</span></button>
+        </div> 
+        
+    </div>
+
+    <div id="routes-container">
+        <div class="table-header">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="order">Route ID</th>
+                        <th class="order">Day</th>
+                        <th class="order">Start time</th>
+                        <th class="order">Warehouse</th>
+                    </tr>
+                </thead>  
+            </table>
+        </div>
+
+        <div class="table-content">
+
+            <table id="table-list">
+                <tbody>
+                    <tr *ngFor="let route of routes" >
+                        <td class="order order-id">{{route.id}} <a href="/customize-order?id={{route.id}}" id="order-details">details</a> </td>
+                        <td class="order">{{route.day}}</td>
+                        <td class="order">{{route.start_time}}</td>
+                        <td class="order">{{route.warehouse}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

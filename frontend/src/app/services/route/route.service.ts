@@ -4,6 +4,7 @@ import { Route } from '../../models/route'
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
 	providedIn: 'root'
@@ -33,5 +34,24 @@ export class RouteService {
 			.pipe(
 				tap(_ => console.log("Service called"))
 			)
+	}
+
+	getNLastRoutes(n: number): Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'lastroutes/' + n)
+	}
+
+	getFilteredRoutes(date_min: NgbDate, date_max: NgbDate, by: number): Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'filter/' + 
+		this.dateToStringWithZeros(date_min) + '/' + 
+		this.dateToStringWithZeros(date_max) + '/' + 
+		by)
+	}
+
+	dateToStringWithZeros(date: NgbDate){
+		var zero = ""
+		var day_zero = ""
+		if (date.month < 10) zero = "0"
+		if (date.day < 10) day_zero = "0"
+		return (date.year + '-' + zero + date.month + '-' + date.day + day_zero)  		
 	}
 }

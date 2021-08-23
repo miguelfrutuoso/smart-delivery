@@ -2,20 +2,34 @@ from rest_framework import viewsets, filters, generics, permissions
 from delivery.models import Route
 from ..serializers import routeSerializer, routeWithDetailsSerializer
 from django.shortcuts import get_object_or_404
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from ..permissions import isAdminPermission
+import datetime
 
 class GetRoutes(generics.ListAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
     queryset = Route.objects.all()
     serializer_class = routeSerializer
 
 class CreateRoute(generics.CreateAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
     queryset = Route.objects.all()
     serializer_class = routeSerializer
 
 class CreateManualRoute(generics.CreateAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+    
     queryset = Route.objects.all()
     serializer_class = routeSerializer
 
 class GetRoute(generics.RetrieveAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
 
     serializer_class = routeSerializer
 
@@ -24,9 +38,10 @@ class GetRoute(generics.RetrieveAPIView):
         return get_object_or_404(Route, id=item)
 
 class GetRouteWithDetails(generics.RetrieveAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
 
     serializer_class = routeWithDetailsSerializer
-
     def get_object(self, queryset=None, **kwargs):
 
         route = Route.objects.all().values()
@@ -34,3 +49,27 @@ class GetRouteWithDetails(generics.RetrieveAPIView):
         item = self.kwargs.get('route')
        # return get_object_or_404(Route, id=item, orders__ordertimelocation__selected=1)
         return get_object_or_404(Route, id=item)
+
+class GetNLastRoutes(generics.ListAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        n = self.kwargs.get('n')
+        return Route.objects.filter(day__gte = datetime.date.today()).order_by('day')[:n]
+
+class GetFilteredRoutes(generics.ListAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        options = ['id', 'date_available', '-date_available']
+        date_min = self.kwargs.get('date_min')
+        print(date_min)
+        date_max = self.kwargs.get('date_max')
+        by = self.kwargs.get('by')
+        return Route.objects.filter(day__gte = date_min, day__lte = date_max).order_by(options[by])

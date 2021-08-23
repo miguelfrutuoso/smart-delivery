@@ -11,19 +11,27 @@ import { GenerateRouteComponent } from './generate-route/generate-route.componen
 import { DevToolsComponent } from './dev-tools/dev-tools.component'
 import { RandomDataComponent } from './random-data/random-data.component'
 import { RouteComponent } from './route/route.component'
+import { AdminOrdersComponent} from './admin-orders/admin-orders.component'
+import { AdminRoutesComponent } from './admin-routes/admin-routes.component'
+
+import { AuthGuard } from './guards/auth.guard'
+import { IsAdminGuard } from './guards/is-admin.guard'
+
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate:[AuthGuard] },
   { path: 'notfound', component: PageNotFoundComponent },
   { path: 'singin', component: RegisterComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate:[IsAdminGuard] },
   { path: 'add-order', component: AddOrderComponent },
   { path: 'home', component:HomeComponent},
   { path: 'customize-order', component:CustomizeOrderComponent },
-  { path: 'generate-route', component:GenerateRouteComponent},
-  { path: 'dev-tools', component:DevToolsComponent},
+  { path: 'generate-route', component:GenerateRouteComponent, canActivate:[IsAdminGuard]},
+  { path: 'dev-tools', component:DevToolsComponent, canActivate:[IsAdminGuard]},
   { path: 'random-data', component:RandomDataComponent},
   { path: 'route', component:RouteComponent},
+  { path: 'admin-orders', component:AdminOrdersComponent},
+  { path: 'admin-routes', component:AdminRoutesComponent},
   { path: '**', component: LoginComponent },
 ]
 

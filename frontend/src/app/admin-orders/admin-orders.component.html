@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="filters">
+
+        <div class="date-filters">
+            <div id="datecontainer">
+                <h3 id="deliverydate-text">Min date</h3>
+                <input class="form-control"
+                id="datePicker"
+                placeholder="yyyy-mm-dd"
+                name="deliveryDate"
+                [(ngModel)]="minDate"
+                ngbDatepicker #d="ngbDatepicker">
+                <button 
+                    class="btn btn-outline-secondary calendar"
+                    (click)="d.toggle()"
+                    type="button">
+                    <i id="calendar" class="fa fa-calendar"></i>
+                </button>
+            </div>
+    
+            <div id="datecontainer">
+                <h3 id="deliverydate-text">Max date</h3>
+                <input class="form-control"
+                id="datePicker"
+                placeholder="yyyy-mm-dd"
+                name="deliveryDate"
+                [(ngModel)]="maxDate"
+                ngbDatepicker #e="ngbDatepicker">
+                <button 
+                    class="btn btn-outline-secondary calendar"
+                    (click)="e.toggle()"
+                    type="button">
+                    <i id="calendar" class="fa fa-calendar"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="orderby-filter">
+            <h3>Order By</h3>
+            <div>
+                <select [(ngModel)]="orderbyvalue" required name="retailer">
+                    <option *ngFor="let option of orderby" [value]="option.value">{{option.name}}</option>      
+                </select>
+            </div>
+            <button id="filter" (click)="getFilteredOrders()"><span>Filter</span></button>
+        </div>
+        
+    </div>
+    <div id="orders-container">
+        <div class="table-header">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="order">Order ID</th>
+                        <th class="order">Status</th>
+                        <th class="order">Retailer</th>
+                        <th class="order">User</th>
+                        <th class="order">Date Available</th>
+                    </tr>
+                </thead>  
+            </table>
+        </div>
+
+        <div class="table-content">
+
+            <table id="table-list">
+                <tbody>
+                    <tr *ngFor="let order of orders" >
+                        <td class="order order-id">{{order.id}} <a href="/customize-order?id={{order.id}}" id="order-details">details</a> </td>
+                        <td class="order">Estado</td>
+                        <td class="order">{{order.retailer}}</td>
+                        <td class="order">{{order.customer}}</td>
+                        <td class="order">{{order.date_available}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

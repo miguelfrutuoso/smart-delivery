@@ -1,4 +1,7 @@
 <div class="container">
+    <div id="logged-user">
+        <h2>Welcome {{loggedUser.user_name}}</h2>
+    </div>
     <div id="pending-orders">
         <h1>Pending orders</h1>
         <p *ngIf="orders.length == 0">No orders incoming</p> 
@@ -15,10 +18,11 @@
                 <p>{{order.date_available}}</p>    
             </div>
             <div id="buttons">
-                <button class="button" id="customize-order" ><span>Customize order</span></button>
+                <a class="button" id="customize-order" href="/customize-order?id={{order.id}}"><span>Customize order</span></a>
+                <!-- <button class="button" id="customize-order" (onclick)="location.href='/customize-order?id={{order.id}}'"><span>Customize order</span></button> -->
             </div>
         </div>
     </div>
-
+    
 </div>
 

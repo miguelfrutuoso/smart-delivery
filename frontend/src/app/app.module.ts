@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
 import { RegisterComponent } from './register/register.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -23,6 +23,9 @@ import { GenerateRouteComponent } from './generate-route/generate-route.componen
 import { RandomDataComponent } from './random-data/random-data.component';
 import { DevToolsComponent } from './dev-tools/dev-tools.component';
 import { RouteComponent } from './route/route.component';
+import { AuthInterceptor } from './http-interceptor';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { AdminRoutesComponent } from './admin-routes/admin-routes.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { RouteComponent } from './route/route.component';
     RandomDataComponent,
     DevToolsComponent,
     RouteComponent,
+    AdminOrdersComponent,
+    AdminRoutesComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,12 @@ import { RouteComponent } from './route/route.component';
     NoopAnimationsModule,
     NgbModule,
   ],
-  providers: [LoginService],
+  providers: [LoginService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
