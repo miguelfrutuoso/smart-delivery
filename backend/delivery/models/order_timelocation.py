@@ -6,4 +6,5 @@ class orderTimelocation(models.Model):
     latitude = models.DecimalField(decimal_places=16, max_digits=20)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='ordertimelocation', related_query_name="ordertimelocation", null=True)
     selected = models.BooleanField(default=False)
+    nth_order = models.IntegerField(null=True)
     

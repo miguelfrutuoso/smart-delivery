@@ -8,7 +8,7 @@ class orderTimelocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = orderTimelocation
-        fields = ('longitude', 'latitude', 'time_interval', 'selected')
+        fields = ('longitude', 'latitude', 'time_interval', 'selected', 'nth_order')
 
 
     def create(self, validated_data):
@@ -19,7 +19,7 @@ class orderTimelocationSerializer(serializers.ModelSerializer):
            timeInterval.objects.create(order_timelocation=ordertimelocation, **time_interval_data)
         return ordertimelocation
 
-
+#TODO DELETE
     # def create(self, validated_data):
     #     time_intervals_data = validated_data.pop('time_interval')
     #     ordertimelocation = orderTimelocation.objects.create(**validated_data)
