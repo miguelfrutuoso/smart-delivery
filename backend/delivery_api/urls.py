@@ -39,7 +39,7 @@ route_patterns = ([
     path('', GetRoutes.as_view(), name='getroutes'),
     path('create/', CreateRoute.as_view(), name='createroute'),
     path('createManual/', CreateManualRoute.as_view(), name='createmanualroute'),
-    path('<int:route>', GetRouteWithDetails.as_view(), name='getroute'),
+    path('<int:pk>', GetRouteWithDetails.as_view(), name='getroute'),
     path('lastroutes/<int:n>', GetNLastRoutes.as_view(), name='lastnorders'),
     path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredRoutes.as_view(), name='filteredroutes')
 ], 'route')

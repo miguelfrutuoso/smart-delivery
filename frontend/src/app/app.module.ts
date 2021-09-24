@@ -25,7 +25,9 @@ import { DevToolsComponent } from './dev-tools/dev-tools.component';
 import { RouteComponent } from './route/route.component';
 import { AuthInterceptor } from './http-interceptor';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
-import { AdminRoutesComponent } from './admin-routes/admin-routes.component'
+import { AdminRoutesComponent } from './admin-routes/admin-routes.component';
+import { DateTranformPipe } from './date-tranform.pipe'
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { AdminRoutesComponent } from './admin-routes/admin-routes.component'
     RouteComponent,
     AdminOrdersComponent,
     AdminRoutesComponent,
+    DateTranformPipe,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { AdminRoutesComponent } from './admin-routes/admin-routes.component'
     BrowserAnimationsModule,
     NoopAnimationsModule,
     NgbModule,
+    MatIconModule
   ],
   providers: [LoginService,
     {

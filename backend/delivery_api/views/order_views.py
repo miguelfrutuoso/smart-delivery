@@ -17,6 +17,9 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class CreateOrder(generics.CreateAPIView):
+    '''
+        Create a order
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -24,6 +27,9 @@ class CreateOrder(generics.CreateAPIView):
     serializer_class = OrderSerializer
 
 class GetAllOrders(generics.ListAPIView):
+    '''
+        Get all orders
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -31,6 +37,7 @@ class GetAllOrders(generics.ListAPIView):
     serializer_class = OrderSerializer
 
 class GetNLastOrders(generics.ListAPIView):
+    
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -41,6 +48,9 @@ class GetNLastOrders(generics.ListAPIView):
         return Order.objects.filter(date_available__gte = datetime.date.today()).order_by('date_available')[:n]
 
 class GetFilteredOrders(generics.ListAPIView):
+    '''
+        Get orders between two dates
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -56,6 +66,9 @@ class GetFilteredOrders(generics.ListAPIView):
 
 
 class GetOrders(generics.ListAPIView):
+    '''
+        Get logged user orders
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -66,6 +79,9 @@ class GetOrders(generics.ListAPIView):
         return Order.objects.filter(customer_id=us) #TODO ALTERAR PARA USER LOGGED https://www.django-rest-framework.org/api-guide/filtering/#filtering-against-the-current-user
 
 def GetOrdersByIDs(request):
+    '''
+        Get orders by id's
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -81,6 +97,9 @@ def GetOrdersByIDs(request):
     return HttpResponse(data)
 
 class GetOrder(generics.RetrieveAPIView):
+    '''
+        Get order by ID
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -91,6 +110,9 @@ class GetOrder(generics.RetrieveAPIView):
         return get_object_or_404(Order, id=item)
     
 class UpdateOrder(generics.UpdateAPIView):
+    '''
+        Update an order
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -98,6 +120,9 @@ class UpdateOrder(generics.UpdateAPIView):
     queryset = Order.objects.all()
 
 class GetOrdersByRangeTime(generics.ListAPIView):
+    '''
+        Get orders given a datetime interval 
+    '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 

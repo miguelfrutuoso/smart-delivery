@@ -13,10 +13,17 @@
             
         </div>
 
-        <div class="location" *ngFor="let order of ordersAddresses">
+        <div class="location" *ngFor="let order of route.orders">
             <embed class="location-svg" src="../../assets/route-elements/route-order.svg" alt="">
             <div class="location-info">
-                <p>{{order}}</p>
+                <p>{{order.ordertimelocation[0].place_name}}</p>
+                <div class="location-time">
+                    <mat-icon class="time-icon" aria-hidden="false" aria-label="Example home icon" color="#000">schedule</mat-icon>
+                    <p> {{order.ordertimelocation[0].time_interval[0].start | dateTranform}}</p>
+                    <embed class="time-interval" src="../../assets/route-elements/time-interval.svg">
+                    <p>{{order.ordertimelocation[0].time_interval[0].end | dateTranform}}</p>
+                </div>
+                
             </div>
             
         </div>
@@ -26,7 +33,12 @@
                 <p>Warehouse</p>
             </div>
         </div>
+        
 
     </div>
     
+    <div class="mapconatiner">
+        <div class="map" id="map"></div>
+    </div>
+
 </div>

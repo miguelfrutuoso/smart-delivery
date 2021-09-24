@@ -7,6 +7,9 @@ from ..permissions import isAdminPermission
 import datetime
 
 class GetRoutes(generics.ListAPIView):
+    '''
+        Get all routes
+    '''
     permission_classes = [isAdminPermission]
     authentication_classes = (JWTAuthentication,)
 
@@ -14,6 +17,9 @@ class GetRoutes(generics.ListAPIView):
     serializer_class = routeSerializer
 
 class CreateRoute(generics.CreateAPIView):
+    '''
+        Create a route
+    '''
     permission_classes = [isAdminPermission]
     authentication_classes = (JWTAuthentication,)
 
@@ -38,17 +44,20 @@ class GetRoute(generics.RetrieveAPIView):
         return get_object_or_404(Route, id=item)
 
 class GetRouteWithDetails(generics.RetrieveAPIView):
-    permission_classes = [isAdminPermission]
-    authentication_classes = (JWTAuthentication,)
+    # permission_classes = [isAdminPermission]
+    # authentication_classes = (JWTAuthentication,)
 
     serializer_class = routeWithDetailsSerializer
-    def get_object(self, queryset=None, **kwargs):
+    def get_queryset(self):
 
-        route = Route.objects.all().values()
+        #route = Route.objects.all().values()
 
-        item = self.kwargs.get('route')
+       
+        item = self.kwargs.get('pk')
+        print(Route.objects.filter(id=item, orders__id = 37))
+
        # return get_object_or_404(Route, id=item, orders__ordertimelocation__selected=1)
-        return get_object_or_404(Route, id=item)
+        return Route.objects.filter(id=item)
 
 class GetNLastRoutes(generics.ListAPIView):
     permission_classes = [isAdminPermission]

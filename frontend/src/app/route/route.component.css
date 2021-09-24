@@ -15,9 +15,15 @@ p {
 }
 
 #route{
+    float: left;
     padding: 30px;
+    width: 40%;
     display: flex;
     flex-direction: column;
+}
+
+#mapconatiner {
+    width: 50%;
 }
 
 .location {
@@ -39,3 +45,42 @@ p {
 #last {
     height: 60px;
 }
+
+.map {
+    height: 700px;
+    width: 700px;
+    margin-bottom: 20px;
+}
+
+.time-interval{
+    height: 36px;
+}
+
+.location-time {
+    display: flex;
+    flex-direction: row;
+}
+
+.location-time p{
+    padding-top: 5px;
+}
+
+.location-time embed{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.time-icon {
+    margin: 5px;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-left: 11px;
+    text-align: center;
+
+    }

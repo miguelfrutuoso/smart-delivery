@@ -33,4 +33,34 @@ export class GeocodingService {
 			tap(_ => console.log("Geocoding service called"))
 		)
 	}
+
+	getMatch(profile, coordinates, radius) {
+
+		console.log(profile)
+		console.log(coordinates)
+		console.log(coordinates.join(';'))
+		
+
+		coordinates = coordinates.join(';');
+
+		const radiuses = radius.join(';')
+
+		console.log('https://api.mapbox.com/matching/v5/mapbox/' + 
+		profile + '/' + 
+		coordinates + '?geometries=geojson&radiuses=' +
+		radiuses + '&access_token=' +
+		environment.access_token)
+
+		return this.http.get('https://api.mapbox.com/matching/v5/mapbox/' + 
+			profile + '/' + 
+			coordinates + '?geometries=geojson&radiuses=' +
+			radiuses + '&access_token=' +
+			environment.access_token)
+			.pipe(
+				map((data: {code, message, matchings}) => {
+					return data.matchings[0].geometry
+				})
+			)
+				
+	}
 }
