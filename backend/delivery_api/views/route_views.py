@@ -50,13 +50,8 @@ class GetRouteWithDetails(generics.RetrieveAPIView):
     serializer_class = routeWithDetailsSerializer
     def get_queryset(self):
 
-        #route = Route.objects.all().values()
-
-       
         item = self.kwargs.get('pk')
-        print(Route.objects.filter(id=item, orders__id = 37))
 
-       # return get_object_or_404(Route, id=item, orders__ordertimelocation__selected=1)
         return Route.objects.filter(id=item)
 
 class GetNLastRoutes(generics.ListAPIView):
@@ -82,3 +77,14 @@ class GetFilteredRoutes(generics.ListAPIView):
         date_max = self.kwargs.get('date_max')
         by = self.kwargs.get('by')
         return Route.objects.filter(day__gte = date_min, day__lte = date_max).order_by(options[by])
+
+class GetRoutesByWarehouse(generics.ListAPIView):
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        wh = self.kwargs.get('wh')
+        return Route.objects.filter(warehouse= wh)
+    

@@ -56,9 +56,27 @@ td {
 }
 
 .date-filters {
-    margin-top: 20px;
     display: flex;
     flex-direction: row; 
+    margin-top: 10px;
+}
+
+.warehouse-filter {
+    display: flex;
+    flex-direction: row; 
+    margin-top: 10px;
+}
+
+.orderby-filter {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.filterby {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
 }
 
 #datecontainer{
@@ -86,11 +104,6 @@ select {
     margin-bottom: 10px;
 }
 
-.orderby-filter {
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-}
 
 
 #filter {
@@ -128,3 +141,7 @@ select {
 }
 
 #filter:focus {outline:0;}
+
+#not-found {
+    text-align: center;
+}

@@ -47,6 +47,10 @@ export class RouteService {
 		by)
 	}
 
+	getFilteredRoutesByWarehouse(warehouse: number): Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'filter/warehouse/' + warehouse)
+	}
+
 	dateToStringWithZeros(date: NgbDate){
 		var zero = ""
 		var day_zero = ""

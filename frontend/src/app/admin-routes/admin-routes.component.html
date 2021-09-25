@@ -1,7 +1,16 @@
 <div class="container">
     <div class="filters">
 
-        <div class="date-filters">
+        <div class="filterby">
+            <h3>Filter By</h3>
+            <div>
+                <select [(ngModel)]="filterbyvalue" required name="retailer">
+                    <option *ngFor="let option of filterby" [value]="option.value">{{option.name}}</option>      
+                </select>
+            </div>
+        </div> 
+
+        <div class="date-filters" *ngIf="filterbyvalue == 0">
             <div id="datecontainer">
                 <h3 id="deliverydate-text">Min date</h3>
                 <input class="form-control"
@@ -33,6 +42,13 @@
                     <i id="calendar" class="fa fa-calendar"></i>
                 </button>
             </div>
+        </div>
+
+        <div class="warehouse-filter" *ngIf="filterbyvalue == 1">
+            <h3 id="deliverydate-text">Warehouse</h3>
+            <select [(ngModel)]="warehouse" required name="warehouse">
+                <option *ngFor="let option of warehouses" [value]="option.id">{{option.name}}</option>      
+            </select>
         </div>
 
         <div class="orderby-filter">
@@ -73,6 +89,8 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h3 id="not-found" *ngIf="routes.length == 0">Routes not found</h3>
         </div>
 
     </div>

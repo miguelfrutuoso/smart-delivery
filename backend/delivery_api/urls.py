@@ -2,6 +2,7 @@ from django.urls import path, include, register_converter, re_path
 from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders 
 from .views.warehouse_views import GetWarehouses, CreateWarehouse, GetWarehouseByID
 from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails, GetNLastRoutes, GetFilteredRoutes
+from .views import GetRoutesByWarehouse
 from datetime import datetime
 
 app_name = 'delivery_api'
@@ -41,7 +42,8 @@ route_patterns = ([
     path('createManual/', CreateManualRoute.as_view(), name='createmanualroute'),
     path('<int:pk>', GetRouteWithDetails.as_view(), name='getroute'),
     path('lastroutes/<int:n>', GetNLastRoutes.as_view(), name='lastnorders'),
-    path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredRoutes.as_view(), name='filteredroutes')
+    path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredRoutes.as_view(), name='filteredroutes'),
+    path('filter/warehouse/<int:wh>', GetRoutesByWarehouse.as_view(), name='routesbywarehouse')
 ], 'route')
 
 urlpatterns = [
