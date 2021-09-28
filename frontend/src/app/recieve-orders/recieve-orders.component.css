@@ -1,0 +1,169 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+h3 {
+    font-family: 'Nunito-light', sans-serif;
+}
+
+.container {
+    max-width: unset;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.search-container{
+    float: left;
+    width: 25%;
+}
+
+.order-container {
+    float: left;
+    width: 65%;  
+}
+
+select {
+    font-family: 'Nunito-light', sans-serif;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+    background: #f3f0f1;
+    width: 235px;
+    margin-bottom: 10px;
+}
+
+.search {
+    width: 250px;
+	background: #f3f0f1;
+    margin-bottom: 25px;
+    border-radius: 18px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2); 
+    color: #6f6cde;
+	border-color: transparent;
+}
+
+.search span {
+	line-height: 60px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+.search:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search:active {
+	opacity: 1;
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+    color: #79e3b6;
+}
+
+.search:focus {outline:0;}
+
+.search:disabled {
+    color: #aaa9c5;
+}
+
+
+.table-header {
+    font-family: 'Nunito', sans-serif;
+    background-color:#00b5e7b0;
+    color: white;
+    border: 1px solid #7980818c;
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+}
+
+th{
+    padding: 10px 15px; 
+    text-align: left;
+    text-transform: uppercase;
+    
+}
+
+td {
+    padding: 15px;
+    vertical-align:middle;
+    border: 1px solid #a4a9aa57;
+}
+
+td a {
+    width:100%;
+}
+
+.overlay {
+    font-family: 'Nunito-SemiBold', sans-serif;
+    width: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3.3em;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; 
+    cursor: pointer;
+}
+
+.accept {
+    background: rgb(0,255,0);
+    background: -moz-radial-gradient(circle, rgba(0,255,0,0.3) 0%, rgba(5,126,1,0.3) 100%);
+    background: -webkit-radial-gradient(circle, rgba(0,255,0,0.3) 0%, rgba(5,126,1,0.3) 100%);
+    background: radial-gradient(circle, rgba(0,255,0,0.3) 0%, rgba(5,126,1,0.3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ff00",endColorstr="#057e01",GradientType=1);
+}
+
+.reject {
+    left: 50%;
+    background: rgb(255,0,0);
+    background: -moz-radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(120,0,0,0.3) 100%);
+    background: -webkit-radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(120,0,0,0.3) 100%);
+    background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(120,0,0,0.3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff0000",endColorstr="#780000",GradientType=1);
+}
+
+tr {
+    font-family: 'Nunito-Regular', sans-serif;
+    position: relative;
+}
+
+.order{
+    width: 25%;
+}
+
+
+tr:hover > .overlay{
+    opacity: 1;
+
+}
+
+.accept:hover {
+    background: rgb(0,255,0);
+    background: -moz-radial-gradient(circle, rgba(0,255,0,0.7) 0%, rgba(5,126,1,0.8) 100%);
+    background: -webkit-radial-gradient(circle, rgba(0,255,0,0.7) 0%, rgba(5,126,1,0.8) 100%);
+    background: radial-gradient(circle, rgba(0,255,0,0.7) 0%, rgba(5,126,1,0.8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00ff00",endColorstr="#057e01",GradientType=1);
+    transition: background 0.3s ease-in-out;
+}
+
+.reject:hover {
+    background: rgb(255,0,0);
+    background: -moz-radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(120,0,0,0.8) 100%);
+    background: -webkit-radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(120,0,0,0.8) 100%);
+    background: radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(120,0,0,0.8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff0000",endColorstr="#780000",GradientType=1);
+    transition: background 0.3s ease-in-out; 
+}

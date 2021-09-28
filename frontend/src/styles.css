@@ -4,8 +4,18 @@
 }
 
 @font-face {
+    font-family: 'Nunito-Regular';
+    src: url(assets/font/Nunito-Regular.ttf);
+}
+
+@font-face {
     font-family: 'Nunito-Light';
     src: url(assets/font/Nunito-Light.ttf);
+}
+
+@font-face {
+    font-family: 'Nunito-SemiBold';
+    src: url(assets/font/Nunito-SemiBold.ttf);
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -28,6 +28,7 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { AdminRoutesComponent } from './admin-routes/admin-routes.component';
 import { DateTranformPipe } from './date-tranform.pipe'
 import {MatIconModule} from '@angular/material/icon';
+import { RecieveOrdersComponent } from './recieve-orders/recieve-orders.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatIconModule} from '@angular/material/icon';
     AdminOrdersComponent,
     AdminRoutesComponent,
     DateTranformPipe,
+    RecieveOrdersComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,49 @@
+<div class="container">
+
+    <h1>Recieve orders</h1>
+
+    <div class="search-container">
+        <h3>Choose Warehouse</h3>
+        <div>
+            <select [(ngModel)]="selectedWarehouse" required name="selectedWarehouse">
+                <option value="" disabled selected>Select warehouse</option>
+                <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>      
+            </select>
+        </div>
+        <button class="search" (click)="getOrders()"><span>Search orders</span></button>
+    </div>
+
+    <div class="order-container">
+        <div class="table-header">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="order">Order ID</th>
+                        <th class="order">Retailer</th>
+                        <th class="order">User</th>
+                        <th class="order">Created</th>
+                    </tr>
+                </thead>  
+            </table>
+        </div>
+        <div class="table-content">
+
+            <table id="table-list">
+                <tbody>
+                    <tr *ngFor="let order of orders; let i = index" [attr.data-index]="i" id="order">
+                        <td class="order order-id">{{order.id}}</td>
+                        <td class="order">{{order.retailer}}</td>
+                        <td class="order">{{order.customer}}</td>
+                        <td class="order">{{order.date_available}}</td>
+                        <td (click)="accept(order)" class="overlay accept">Accept</td>
+                        <td (click)="reject(order)" class="overlay reject">Reject</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   
+    
+    
+</div>

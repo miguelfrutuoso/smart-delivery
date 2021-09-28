@@ -41,13 +41,10 @@ class routeSerializer(serializers.ModelSerializer):
             combinations.append(combination)
 
         opt_route = vrptw(combinations, 420)
-        
-        print(opt_route)
 
         for idx, order in enumerate(opt_route['route']):
-            Order.objects.filter(id=order['order_id']).update(route=route)
+            Order.objects.filter(id=order['order_id']).update(route=route, state=Order.State.READYDIS)
             orderTimelocation.objects.filter(id=order['id']).update(selected=True, nth_order=idx)
-            print(idx, order)
 
         return route
 

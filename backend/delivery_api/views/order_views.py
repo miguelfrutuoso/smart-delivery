@@ -4,7 +4,7 @@ from delivery.models import Order, orderTimelocation, Warehouse
 from ..serializers import OrderSerializer, orderTimelocationSerializer
 from math import pi, sin, cos, sqrt, atan2
 from django.utils import timezone
-import datetime
+from datetime import datetime
 from decimal import Decimal
 from django.conf import settings
 from django.utils.timezone import make_aware
@@ -14,7 +14,7 @@ import io
 from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework_simplejwt.authentication import JWTAuthentication
-
+from django.utils.timezone import now
 
 class CreateOrder(generics.CreateAPIView):
     '''
@@ -155,7 +155,29 @@ class GetOrdersByRangeTime(generics.ListAPIView):
                          
         return orders
     
+class GetProcessingOrders(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
     
+    def get_queryset(self):
+        wh = self.kwargs.get('wh')
+
+        return Order.objects.filter(warehouse=wh, state=Order.State.PROCESSING)
+
+class AcceptOrder(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
+
+    def put(self, request, *args, **kwargs):
+        order = self.kwargs.get('id')
+        return HttpResponse(Order.objects.filter(id = order).update(state=Order.State.READYCTM, date_available=datetime.today()))
+        
+
+
 def inRange(lon1, lat1, lon2, lat2, range): # Check if 2 locations(longitude, latitude) are less than 'range' meters apart 
 
         R = 6371e3; #meters

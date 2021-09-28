@@ -99,6 +99,14 @@ export class OrderService {
 		by)
 	}
 
+	getProcessingOrders(warehouse: number): Observable<Order[]> {
+		return this.http.get<Order[]>(this.URL + 'processing/' + warehouse)
+	}
+
+	acceptOrders(order: Order): Observable<Order> {
+		return this.http.put<Order>(this.URL + 'accept/' + order.id, order.id)
+	}
+
 	dateToStringWithZeros(date: NgbDate){
 		var zero = ""
 		var day_zero = ""
