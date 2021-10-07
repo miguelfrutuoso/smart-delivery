@@ -49,8 +49,8 @@
                 </textarea>
             </div>
 
-            <div >
-                <input type="checkbox" id="addr-time" name="addr-time">
+            <div>
+                <input [(ngModel)]="addDelAdr" type="checkbox" id="addr-time" name="addr-time">
                 <label id="checkbox" for="addr-time">Add delivery address and timings</label><br>
             </div>
 
@@ -59,7 +59,7 @@
 
     </div>
 
-    <div class="mapcontainer">
+    <div [hidden]="!addDelAdr" class="mapcontainer">
         <h2>Delivery addresses and timings</h2>
         <h3>Drag the marker to destiny location</h3>
         <div class="map" id="map"></div>
@@ -101,7 +101,7 @@
         <button class="button" id="addLocation" (click)="addLocation()"><span>Add location</span></button>
     </div>
 
-    <div class="selectedlocations">
+    <div [hidden]="!addDelAdr" class="selectedlocations">
         <h2>Selected locations</h2>
         <h3 *ngIf="locations.length == 0" >No locations have been added yet</h3>
         <div *ngFor="let location of locations">

@@ -38,6 +38,8 @@ export class AddOrderComponent implements OnInit {
 
 	selectedNumber: number;
 
+	addDelAdr: boolean;
+
 	customer: number;
 	retailer: number;
 	availableDate: NgbDate;
@@ -66,7 +68,8 @@ export class AddOrderComponent implements OnInit {
 
 	ngOnInit(): void {
 		//map initialization
-		
+		this.addDelAdr = true;
+
 		Object.getOwnPropertyDescriptor(mapboxgl, "accessToken").set('pk.eyJ1IjoibWlndWVsZnJ1dHVvc28iLCJhIjoiY2txdjljYWVpMDllNzJ6cDYzazg2dmhoZiJ9.2wSd1RH1bT_aKfCZaAdtVg');
 		this.map = new mapboxgl.Map({
 			container: 'map',

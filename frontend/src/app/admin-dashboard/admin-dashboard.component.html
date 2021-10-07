@@ -28,7 +28,7 @@
                     <tbody>
                         <tr *ngFor="let order of orders" >
                             <td class="order order-id">{{order.id}} <a href="/customize-order?id={{order.id}}" id="order-details">details</a> </td>
-                            <td class="order">Estado</td>
+                            <td class="order">{{order.state}}</td>
                             <td class="order">{{order.retailer}}</td>
                             <td class="order">{{order.customer}}</td>
                         </tr>

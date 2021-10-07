@@ -50,7 +50,7 @@ class GetNLastOrders(generics.ListAPIView):
 
     def get_queryset(self):
         n = self.kwargs.get('n')
-        return Order.objects.filter(date_available__gte = datetime.date.today()).order_by('date_available')[:n]
+        return Order.objects.filter(date_available__gte = datetime.today()).order_by('date_available')[:n]
 
 class GetFilteredOrders(generics.ListAPIView):
     '''
@@ -211,8 +211,6 @@ def ChangeToRCtoCS():
         Order.objects.filter(id=order.id).update(state=Order.State.CUSTUMIZED)
 
 
-
-
 class TryChange(generics.ListAPIView):
 
     queryset = Order.objects.all()
@@ -221,8 +219,6 @@ class TryChange(generics.ListAPIView):
     def get_queryset(self):
         ChangeToRCtoCS()
     
-
-
 
 def inRange(lon1, lat1, lon2, lat2, range): # Check if 2 locations(longitude, latitude) are less than 'range' meters apart 
 
