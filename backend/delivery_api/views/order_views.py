@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, filters, generics, permissions
-from delivery.models import Order, orderTimelocation, Warehouse
+from delivery.models import Order, orderTimelocation, Warehouse, timeInterval
+from users.models import User
 from ..serializers import OrderSerializer, orderTimelocationSerializer
 from math import pi, sin, cos, sqrt, atan2
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, timedelta
 from decimal import Decimal
 from django.conf import settings
 from django.utils.timezone import make_aware
@@ -15,13 +16,17 @@ from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.utils.timezone import now
+from celery.decorators import task, periodic_task
+from celery.utils.log import get_task_logger
+from celery.task.schedules import crontab
+from collections import OrderedDict
 
 class CreateOrder(generics.CreateAPIView):
     '''
         Create a order
     '''
-    permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = (JWTAuthentication,)
+    #permission_classes = [permissions.IsAuthenticated]
+    #authentication_classes = (JWTAuthentication,)
 
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
@@ -67,7 +72,7 @@ class GetFilteredOrders(generics.ListAPIView):
 
 class GetOrders(generics.ListAPIView):
     '''
-        Get logged user orders
+        Get logged user Ready To Custumize orders
     '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
@@ -76,7 +81,7 @@ class GetOrders(generics.ListAPIView):
 
     def get_queryset(self):
         us = self.kwargs.get('us')
-        return Order.objects.filter(customer_id=us) #TODO ALTERAR PARA USER LOGGED https://www.django-rest-framework.org/api-guide/filtering/#filtering-against-the-current-user
+        return Order.objects.filter(customer_id=us, state=Order.State.READYCTM) #TODO ALTERAR PARA USER LOGGED https://www.django-rest-framework.org/api-guide/filtering/#filtering-against-the-current-user
 
 def GetOrdersByIDs(request):
     '''
@@ -156,6 +161,9 @@ class GetOrdersByRangeTime(generics.ListAPIView):
         return orders
     
 class GetProcessingOrders(generics.ListAPIView):
+    """
+        Get orders in processing state
+    """
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -167,6 +175,9 @@ class GetProcessingOrders(generics.ListAPIView):
         return Order.objects.filter(warehouse=wh, state=Order.State.PROCESSING)
 
 class AcceptOrder(generics.UpdateAPIView):
+    """
+        Accept an order
+    """
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
 
@@ -176,6 +187,41 @@ class AcceptOrder(generics.UpdateAPIView):
         order = self.kwargs.get('id')
         return HttpResponse(Order.objects.filter(id = order).update(state=Order.State.READYCTM, date_available=datetime.today()))
         
+#class PassToRCtoCS(generics.UpdateAPIView):
+
+
+#@periodic_task(run_every=(crontab(minute='*/15')), name="some_task", ignore_result=True)
+def ChangeToRCtoCS():
+
+    #OTL = orderTimelocationSerializer()
+
+    OTL = OrderedDict()
+
+    #User.objects.filter(id=1)
+
+    #orders = Order.objects.filter(date_available=datetime.today() - timedelta(days=2), state=Order.State.READYCTM)
+    orders = Order.objects.filter(state=Order.State.READYCTM)
+    
+    for order in orders:
+        user = order.customer
+        location = User.objects.filter(id=user.id).values('standart_latitude', 'standart_longitude')[0]
+        otl = orderTimelocation.objects.create(order=order, longitude=location['standart_longitude'], latitude=location['standart_latitude'], selected=True)
+        today = datetime.today()
+        timeInterval.objects.create(order_timelocation=otl, start=make_aware(datetime(today.year, today.month, today.day, 7, 0)), end=make_aware(datetime(today.year, today.month, today.day, 19, 0)))
+        Order.objects.filter(id=order.id).update(state=Order.State.CUSTUMIZED)
+
+
+
+
+class TryChange(generics.ListAPIView):
+
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        ChangeToRCtoCS()
+    
+
 
 
 def inRange(lon1, lat1, lon2, lat2, range): # Check if 2 locations(longitude, latitude) are less than 'range' meters apart 

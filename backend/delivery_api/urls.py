@@ -1,5 +1,5 @@
 from django.urls import path, include, register_converter, re_path
-from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders, GetProcessingOrders, AcceptOrder 
+from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders, GetProcessingOrders, AcceptOrder, TryChange 
 from .views.warehouse_views import GetWarehouses, CreateWarehouse, GetWarehouseByID
 from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails, GetNLastRoutes, GetFilteredRoutes
 from .views import GetRoutesByWarehouse
@@ -29,7 +29,8 @@ order_patterns = ([
     path('lastorders/<int:n>', GetNLastOrders.as_view(), name='lastnorders'),
     path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredOrders.as_view(), name='filteredorders'),
     path("processing/<int:wh>", GetProcessingOrders.as_view(), name="processingorders"),
-    path("accept/<int:id>", AcceptOrder.as_view(), name="acceptorders")
+    path("accept/<int:id>", AcceptOrder.as_view(), name="acceptorders"),
+    path('forceCustom/', TryChange.as_view(), name="trychange")
 ], 'order')
 
 warehouse_patterns = ([

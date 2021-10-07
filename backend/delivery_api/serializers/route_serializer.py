@@ -47,18 +47,7 @@ class routeSerializer(serializers.ModelSerializer):
             orderTimelocation.objects.filter(id=order['id']).update(selected=True, nth_order=idx)
 
         return route
-
-'''
-        bulk = []
-        for order_data in validated_data['orders']:
-            Order.objects.filter(id=order_data.id).update(route=route)
-
-            for orderTL in orderTimelocation.objects.filter(order=order_data)[0:1]:
-                orderTL.selected = True
-                bulk.append(orderTL)
-
-            orderTimelocation.objects.bulk_update(bulk, ['selected']) 
-'''               
+      
 
 class routeWithDetailsSerializer(serializers.ModelSerializer):
 

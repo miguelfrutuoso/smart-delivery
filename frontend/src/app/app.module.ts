@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
 import { RegisterComponent } from './register/register.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent, ForceCustomDialog } from './admin-dashboard/admin-dashboard.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -27,8 +27,10 @@ import { AuthInterceptor } from './http-interceptor';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { AdminRoutesComponent } from './admin-routes/admin-routes.component';
 import { DateTranformPipe } from './date-tranform.pipe'
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { RecieveOrdersComponent } from './recieve-orders/recieve-orders.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { RecieveOrdersComponent } from './recieve-orders/recieve-orders.componen
     AdminRoutesComponent,
     DateTranformPipe,
     RecieveOrdersComponent,
+    ForceCustomDialog
   ],
   imports: [
     BrowserModule,
@@ -60,14 +63,16 @@ import { RecieveOrdersComponent } from './recieve-orders/recieve-orders.componen
     BrowserAnimationsModule,
     NoopAnimationsModule,
     NgbModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
   ],
   providers: [LoginService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }],
+    },
+    DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

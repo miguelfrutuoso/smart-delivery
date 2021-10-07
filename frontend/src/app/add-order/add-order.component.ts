@@ -66,7 +66,7 @@ export class AddOrderComponent implements OnInit {
 
 	ngOnInit(): void {
 		//map initialization
-		/*
+		
 		Object.getOwnPropertyDescriptor(mapboxgl, "accessToken").set('pk.eyJ1IjoibWlndWVsZnJ1dHVvc28iLCJhIjoiY2txdjljYWVpMDllNzJ6cDYzazg2dmhoZiJ9.2wSd1RH1bT_aKfCZaAdtVg');
 		this.map = new mapboxgl.Map({
 			container: 'map',
@@ -82,7 +82,7 @@ export class AddOrderComponent implements OnInit {
 			draggable: true
 		}).setLngLat([this.lng, this.lat])
 			.addTo(this.map);
-	*/
+
 		this.locations = []
 		this.getUsers()
 		console.log(this.users)

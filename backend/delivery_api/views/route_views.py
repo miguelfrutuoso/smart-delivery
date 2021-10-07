@@ -34,6 +34,9 @@ class CreateManualRoute(generics.CreateAPIView):
     serializer_class = routeSerializer
 
 class GetRoute(generics.RetrieveAPIView):
+    '''
+        Get a single route based on an id
+    '''
     permission_classes = [isAdminPermission]
     authentication_classes = (JWTAuthentication,)
 
@@ -55,6 +58,9 @@ class GetRouteWithDetails(generics.RetrieveAPIView):
         return Route.objects.filter(id=item)
 
 class GetNLastRoutes(generics.ListAPIView):
+    '''
+        Get n last routes
+    '''
     permission_classes = [isAdminPermission]
     authentication_classes = (JWTAuthentication,)
 
@@ -65,6 +71,9 @@ class GetNLastRoutes(generics.ListAPIView):
         return Route.objects.filter(day__gte = datetime.date.today()).order_by('day')[:n]
 
 class GetFilteredRoutes(generics.ListAPIView):
+    '''
+        Get Routes between two dates
+    '''
     permission_classes = [isAdminPermission]
     authentication_classes = (JWTAuthentication,)
 
@@ -79,6 +88,9 @@ class GetFilteredRoutes(generics.ListAPIView):
         return Route.objects.filter(day__gte = date_min, day__lte = date_max).order_by(options[by])
 
 class GetRoutesByWarehouse(generics.ListAPIView):
+    '''
+        Get routes warehouse routes
+    '''
     permission_classes = [isAdminPermission]
     authentication_classes = (JWTAuthentication,)
 
@@ -87,4 +99,3 @@ class GetRoutesByWarehouse(generics.ListAPIView):
     def get_queryset(self):
         wh = self.kwargs.get('wh')
         return Route.objects.filter(warehouse= wh)
-    

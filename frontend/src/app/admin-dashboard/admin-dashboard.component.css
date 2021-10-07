@@ -7,6 +7,10 @@ h1 {
     color: #00D0B2;
 }
 
+h2 {
+    font-family: 'Nunito-light', sans-serif;
+}
+
 a {
     text-decoration: none;
 }
@@ -50,6 +54,23 @@ button:active {
 }
 
 button:focus {outline:0;}
+
+.confirm {
+    color: #00D0B2;
+}
+
+.cancel {
+    color: #e70000;
+}
+
+.conf-cancel {
+    width: 190px;
+    margin-right: 20px;
+}
+
+.conf-cancel span  {
+    line-height: 42px;
+}
 
 #ButtonContainer {
     margin-top: 35px;

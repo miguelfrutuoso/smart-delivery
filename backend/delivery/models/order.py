@@ -10,6 +10,7 @@ class Order(models.Model):
     class State(models.TextChoices):
         PROCESSING = 'PR', _('Processing')
         READYCTM = 'RC', _('Ready for Custumize')
+        CUSTUMIZED = 'CS', _('Custumized')
         READYDIS = 'RD', _('Ready for Distribution')
         DISTRIBUTION = 'DT', _('Distribution')
         COMPLETE = 'CP', _('Complete')

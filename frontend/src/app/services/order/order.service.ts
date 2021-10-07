@@ -107,12 +107,17 @@ export class OrderService {
 		return this.http.put<Order>(this.URL + 'accept/' + order.id, order.id)
 	}
 
+	forceCustom() {
+		return this.http.get(this.URL + 'forceCustom/')
+	}
+
+
 	dateToStringWithZeros(date: NgbDate){
 		var zero = ""
 		var day_zero = ""
 		if (date.month < 10) zero = "0"
 		if (date.day < 10) day_zero = "0"
-		return (date.year + '-' + zero + date.month + '-' + date.day + day_zero)  		
+		return (date.year + '-' + zero + date.month + '-' + day_zero + date.day )  		
 	}
 }
 

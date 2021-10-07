@@ -47,6 +47,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_retailer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
+    standart_longitude = models.DecimalField(decimal_places=16, max_digits=20)
+    standart_latitude = models.DecimalField(decimal_places=16, max_digits=20)
 
     objects = UserManager()
 
