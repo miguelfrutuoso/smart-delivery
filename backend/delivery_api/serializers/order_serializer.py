@@ -13,6 +13,10 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         timelocations_data = validated_data.pop('ordertimelocation')
+        
+        if (timelocations_data): # If the order has ordertimelocations means that is custumized
+            validated_data['state'] = Order.State.CUSTUMIZED
+
         order = Order.objects.create(**validated_data)
         
         for timelocation_data in timelocations_data:
