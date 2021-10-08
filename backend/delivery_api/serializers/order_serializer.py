@@ -20,7 +20,6 @@ class OrderSerializer(serializers.ModelSerializer):
         order = Order.objects.create(**validated_data)
         
         for timelocation_data in timelocations_data:
-            print(timelocation_data)
             order_time_location_serializer = orderTimelocationSerializer(data=timelocation_data)
             order_time_location_serializer.is_valid(raise_exception=True)
             order_time_location = order_time_location_serializer.save()
