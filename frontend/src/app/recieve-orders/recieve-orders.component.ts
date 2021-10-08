@@ -38,16 +38,13 @@ export class RecieveOrdersComponent implements OnInit {
 	}
 
 	accept(order: Order) {
-		console.log("ACCEPT" + order)
-		console.log(this.orders)
+		this.orderService.acceptOrders(order).subscribe()
 		this.orders.forEach((value,index)=>{
 			if(value==order) this.orders.splice(index,1);
 		});
 	}
 
 	reject(order: Order) {
-		console.log("REJECT" + order)
-		this.orderService.acceptOrders(order).subscribe()
 		this.orders.forEach((value,index)=>{
 			if(value==order) this.orders.splice(index,1);
 		});
