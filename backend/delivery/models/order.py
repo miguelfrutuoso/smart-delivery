@@ -14,6 +14,7 @@ class Order(models.Model):
         READYDIS = 'RD', _('Ready for Distribution')
         DISTRIBUTION = 'DT', _('Distribution')
         COMPLETE = 'CP', _('Complete')
+        REJECTED = 'RJ', _('Rejected')
 
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='customer')
     retailer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='retailer')

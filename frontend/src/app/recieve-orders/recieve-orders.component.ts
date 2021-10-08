@@ -44,7 +44,8 @@ export class RecieveOrdersComponent implements OnInit {
 		});
 	}
 
-	reject(order: Order) {
+	reject(order: Order) { //TODO Make rejection
+		this.orderService.rejectOrder(order).subscribe()
 		this.orders.forEach((value,index)=>{
 			if(value==order) this.orders.splice(index,1);
 		});

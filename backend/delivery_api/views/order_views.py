@@ -31,6 +31,19 @@ class CreateOrder(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
+class RejectOrder(generics.UpdateAPIView):
+    """
+        Accept an order
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
+
+    def put(self, request, *args, **kwargs):
+        order = self.kwargs.get('id')
+        return HttpResponse(Order.objects.filter(id = order).update(state=Order.State.REJECTED))
+
 class GetAllOrders(generics.ListAPIView):
     '''
         Get all orders
@@ -137,7 +150,7 @@ class GetOrdersByRangeTime(generics.ListAPIView):
         
         date = self.kwargs.get('date')
         orders = Order.objects.filter(ordertimelocation__timeinterval__start__gte=make_aware(date), 
-            ordertimelocation__timeinterval__end__lte=make_aware(date + datetime.timedelta(days=1))).distinct()
+            ordertimelocation__timeinterval__end__lte=make_aware(date + timedelta(days=1))).distinct()
         warehouse = self.kwargs.get('warehouse')
         range = self.kwargs.get('range')
         warehouse = Warehouse.objects.get(id = warehouse)

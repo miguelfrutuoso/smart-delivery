@@ -111,6 +111,9 @@ export class OrderService {
 		return this.http.get(this.URL + 'forceCustom/')
 	}
 
+	rejectOrder(order: Order): Observable<Order> {
+		return this.http.put<Order>(this.URL + 'reject/' + order.id, order.id)
+	}
 
 	dateToStringWithZeros(date: NgbDate){
 		var zero = ""
