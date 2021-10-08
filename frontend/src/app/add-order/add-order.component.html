@@ -17,7 +17,10 @@
                 </select>
             </div>
             <div>
-                <input type="text" placeholder="warehouse" type="warehouse">
+                <select [(ngModel)]="selectedWarehouse" required name="selectedWarehouse">
+                    <option value="" disabled selected>Select warehouse</option>
+                    <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>      
+                </select>
             </div>
             <div>
                 <input type="text" placeholder="weight" class="form__field" [(ngModel)]="weight" name="weight">

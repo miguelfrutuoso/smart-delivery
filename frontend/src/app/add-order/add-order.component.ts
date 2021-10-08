@@ -8,10 +8,12 @@ import { Location } from '../models/location'
 import { timing } from '../models/timing'
 import { Address } from '../models/address'
 import { Order } from '../models/order'
+import { Warehouse } from '../models/warehouse';
 
 import { GeocodingService } from '../services/geocoding/geocoding.service'
 import { OrderService } from '../services/order/order.service'
 import { GetUsersService } from '../services/get-users/get-users.service'
+import { WarehouseService } from '../services/warehouse/warehouse.service'
 
 @Component({
 	selector: 'app-add-order',
@@ -25,6 +27,7 @@ export class AddOrderComponent implements OnInit {
 		private geocodingService: GeocodingService,
 		private OrderService: OrderService,
 		private getUsersService: GetUsersService,
+		private warehouseService: WarehouseService,
 		private config: NgbDatepickerConfig) { 
 			
 			var date = new Date();
@@ -60,6 +63,8 @@ export class AddOrderComponent implements OnInit {
 	description: string;
 
 	users: User[];
+	warehouses: Warehouse[];
+	selectedWarehouse: number;
 
 	deliveryDate: NgbDate;
 	dateOptions = {
@@ -88,8 +93,13 @@ export class AddOrderComponent implements OnInit {
 
 		this.locations = []
 		this.getUsers()
-		console.log(this.users)
+		this.getWarehouses()
 	}
+
+	async getWarehouses() {
+		await this.warehouseService.getWarehouses().subscribe(warehouses => this.warehouses = warehouses)
+	}
+
 
 	async taddLocation() { //Final version
 		this.timings = [
@@ -168,7 +178,8 @@ export class AddOrderComponent implements OnInit {
 				(this.availableDate.year + '-' + (this.availableDate.month - 1) + '-' + this.availableDate.day),
 				this.weight,
 		 		this.locations,
-				this.description)).subscribe()
+				this.description,
+				this.selectedWarehouse)).subscribe()
 		
 	}
 

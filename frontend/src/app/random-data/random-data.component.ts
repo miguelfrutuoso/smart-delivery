@@ -65,17 +65,17 @@ export class RandomDataComponent implements OnInit {
 				
 				randLocations[j] = new Location(locations[i].latitude, locations[i].longitude, times)
 			}
-
-			order = new Order(
-				1, // TODO RANDOM in users
-				2,
-				this.dateToString(this.dataDay),
-				Math.floor(Math.random() * 10) + 1,
-				randLocations,
-				"Random order"
-			)
-			console.log(order)
-			this.orderService.addOrder(order).subscribe()
+			
+			// order = new Order(
+			// 	1, // TODO RANDOM in users
+			// 	2,
+			// 	this.dateToString(this.dataDay),
+			// 	Math.floor(Math.random() * 10) + 1,
+			// 	randLocations,
+			// 	"Random order"
+			// )
+			// console.log(order)
+			// this.orderService.addOrder(order).subscribe()
 		}
 
 	}
