@@ -210,7 +210,9 @@ def shift_timeinterval(time_interval, start_time):
     return (time_interval[0] - start_time, time_interval[1] - start_time)
 
 def order_combination(orders, solution):
-
+    """
+        Returns a list of orders ordered by positions given on solution
+    """
     ordered_combination = []
     for pos in solution:
         print(pos)

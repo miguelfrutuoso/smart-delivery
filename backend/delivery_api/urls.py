@@ -1,8 +1,8 @@
 from django.urls import path, include, register_converter, re_path
-from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders, GetProcessingOrders, AcceptOrder, TryChange 
+from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders, GetProcessingOrders, AcceptOrder, TryChange  
 from .views.warehouse_views import GetWarehouses, CreateWarehouse, GetWarehouseByID
 from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails, GetNLastRoutes, GetFilteredRoutes
-from .views import GetRoutesByWarehouse, RejectOrder
+from .views import GetRoutesByWarehouse, RejectOrder, GetRecievedOrders, GetInDistributionOrders
 from datetime import datetime
 
 app_name = 'delivery_api'
@@ -29,6 +29,8 @@ order_patterns = ([
     path('lastorders/<int:n>', GetNLastOrders.as_view(), name='lastnorders'),
     path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredOrders.as_view(), name='filteredorders'),
     path("processing/<int:wh>", GetProcessingOrders.as_view(), name="processingorders"),
+    path('recieved/', GetRecievedOrders.as_view(), name="recievedorders"),
+    path("distribution/", GetInDistributionOrders.as_view(), name="distributionorders"),
     path("accept/<int:id>", AcceptOrder.as_view(), name="acceptorders"),
     path('forceCustom/', TryChange.as_view(), name="trychange"),
     path('reject/<int:id>', RejectOrder.as_view(), name="rejectorder")

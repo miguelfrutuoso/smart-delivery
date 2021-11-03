@@ -2,7 +2,7 @@
     <div id="logged-user">
         <h2>Welcome {{loggedUser.user_name}}</h2>
     </div>
-    <div id="pending-orders">
+    <div id="orders">
         <h1>Pending orders</h1>
         <p *ngIf="orders.length == 0">No orders incoming</p> 
         
@@ -23,6 +23,28 @@
             </div>
         </div>
     </div>
+
+    <div id="orders">
+        <h1>Incoming orders</h1>
+    </div>
+
+    <div id="orders">
+        <h1>Past orders</h1>
+        <div id="order" *ngFor="let order of recievedOrders">
+            <div id="order-id">
+                <p>{{order.id}}</p>
+            </div>
+            <div id="product-description">
+                <p>{{order.description}}</p>
+            </div>
+            <div id="date-available">
+                <p>Delivered at:</p>
+                <p>{{order.date_delivery}}</p>    
+            </div>
+        </div>
+    </div>
     
+    
+
 </div>
 

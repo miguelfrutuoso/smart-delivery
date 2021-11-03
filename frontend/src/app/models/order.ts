@@ -6,6 +6,7 @@ export class Order {
     customer: number;
     retailer: number;
     date_available: string;
+    date_delivery: string;
     weight: number;
     ordertimelocation: Location[];
     description: string;
@@ -20,10 +21,12 @@ export class Order {
         description: string,
         warehouse: number,
         state?: string,
+        date_delivery?: string,
         ){
             this.customer = customer,
             this.retailer = retailer,
             this.date_available = date_available,
+            this.date_delivery = date_delivery,
             this.weight = weight,
             this.ordertimelocation = ordertimelocation ,
             this.description = description,

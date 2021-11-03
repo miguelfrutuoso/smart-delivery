@@ -37,7 +37,7 @@ class routeSerializer(serializers.ModelSerializer):
 
         combinations = []
 
-        for combination in product(*orders):
+        for combination in product(*orders): #Build all cominations possible
             combinations.append(combination)
 
         opt_route = vrptw(combinations, 420)

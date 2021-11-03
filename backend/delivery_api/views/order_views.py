@@ -20,6 +20,7 @@ from celery.decorators import task, periodic_task
 from celery.utils.log import get_task_logger
 from celery.task.schedules import crontab
 from collections import OrderedDict
+from django.db.models import Q
 
 class CreateOrder(generics.CreateAPIView):
     '''
@@ -95,6 +96,32 @@ class GetOrders(generics.ListAPIView):
     def get_queryset(self):
         us = self.kwargs.get('us')
         return Order.objects.filter(customer_id=us, state=Order.State.READYCTM) #TODO ALTERAR PARA USER LOGGED https://www.django-rest-framework.org/api-guide/filtering/#filtering-against-the-current-user
+
+class GetRecievedOrders(generics.ListAPIView):
+    '''
+        Get recieved user's orders 
+    '''
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        us = self.request.user
+        return Order.objects.filter(customer_id=us, state=Order.State.COMPLETE) | Order.objects.filter(customer_id=us, state=Order.State.REJECTED)
+
+class GetInDistributionOrders(generics.ListAPIView):
+    '''
+        Get in Distribution logged user's oreders
+    '''
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = OrderSerializer
+    def get_queryset(self):
+        us = self.request.user
+        return Order.objects.filter(customer_id=us, state=Order.State.DISTRIBUTION)
+
 
 def GetOrdersByIDs(request):
     '''

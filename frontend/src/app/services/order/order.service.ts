@@ -60,6 +60,14 @@ export class OrderService {
 		)
 	}
 
+	getUserRecievedOrders(): Observable<Order[]> {
+		return this.http.get<Order[]>(this.URL + 'recieved/')
+	}
+	
+	getUserDistributionOrders(): Observable<Order[]> {
+		return this.http.get<Order[]>(this.URL + 'distribution/')
+	}
+
 	getOrdersByIDs(orders: Order[]): Observable<Order[]> {
 
 		var ordersString = '?';

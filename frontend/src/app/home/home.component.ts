@@ -13,19 +13,32 @@ export class HomeComponent implements OnInit {
 
 	constructor(private orderService: OrderService, private authService: AuthService) { }
 
-	orders: Order[]
+	orders: Order[];
+	recievedOrders: Order[];
+	distributionOrders: Order[];
 	loggedUser: User;
 
 	ngOnInit(): void {
 		this.getOrders()
+		this.getRecievedOrders()
 		this.authService.getUserLogged().subscribe(
 			user => this.loggedUser = user
 		)
 	}
 
 	async getOrders() {
-		await this.orderService.getOrders(this.loggedUser.id) // TODO mudar para user logged
+		await this.orderService.getOrders(1) // TODO mudar para user logged
 			.subscribe(orders => this.orders = orders)
 		
+	}
+
+	async getRecievedOrders() {
+		await this.orderService.getUserRecievedOrders()
+			.subscribe(orders => this.recievedOrders = orders)
+	}
+
+	async getDistributionOrders() {
+		await this.orderService.getUserDistributionOrders()
+			.subscribe(orders => this.distributionOrders = orders)
 	}
 }	
