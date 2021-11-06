@@ -5,11 +5,12 @@ export class User {
     email: string;
     user_name: string;
     password: string;
-    firstname: string;
-    lastname: string;
+    first_name: string;
+    last_name: string;
     gender: Gender;
     is_admin: boolean;
     is_retailer: Boolean;
-
-    
+    is_driver: Boolean;
+    standart_longitude: number;
+    standart_latitude: number;
 }

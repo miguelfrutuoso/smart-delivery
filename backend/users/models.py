@@ -45,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     start_date = models.DateTimeField(default=timezone.now)
     is_admin = models.BooleanField(default=False)
     is_retailer = models.BooleanField(default=False)
+    is_driver = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     gender = models.IntegerField(choices=GENDER_CHOICES, null=True)
     standart_longitude = models.DecimalField(decimal_places=16, max_digits=20)

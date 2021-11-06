@@ -31,6 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RecieveOrdersComponent } from './recieve-orders/recieve-orders.component';
 import { DatePipe } from '@angular/common';
+import { DriverMenuComponent } from './driver-menu/driver-menu.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { DatePipe } from '@angular/common';
     AdminRoutesComponent,
     DateTranformPipe,
     RecieveOrdersComponent,
-    ForceCustomDialog
+    ForceCustomDialog,
+    DriverMenuComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,

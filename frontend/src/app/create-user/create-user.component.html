@@ -1,0 +1,55 @@
+<div class="container">
+    <form>
+        <div class="add-user">
+            <h1>Add user</h1>
+            <div>
+                <input type="firstname" placeholder="First Name" class="form__field" [(ngModel)]="user.first_name"  name="login-firstname"/>
+            </div>
+            <div>
+                <input type="lastname" placeholder="Last Name" class="form__field" [(ngModel)]="user.last_name" name="login-lastname"/>
+            </div>
+            <div>
+                <input type="username" placeholder="Username" class="form__field" [(ngModel)]="user.user_name"  name="login-username"/>
+            </div>
+            <div>
+                <input type="email" placeholder="E-mail" class="form__field" [(ngModel)]="user.email" name="login-email"/>
+            </div>
+            <div>   
+                <input type="password" placeholder="Password" class="form__field" [(ngModel)]="user.password" name="login-password"/>
+            </div>
+                
+            <div class="toggle">
+                <h3>Admin</h3>
+                <label class="switch">
+                    <input [(ngModel)]="user.is_admin" type="checkbox" checked name="login-admin">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="toggle">
+                <h3>Retailer</h3>
+                <label class="switch">
+                    <input [(ngModel)]="user.is_retailer" type="checkbox" checked name="login-retailer">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="toggle">
+                <h3>Driver</h3>
+                <label class="switch">
+                    <input [(ngModel)]="user.is_driver" type="checkbox" checked name="login-driver">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <button class="button" id="create-user" (click)="createUser()"><span>Add order</span></button>
+        </div>
+        
+        <div class="mapcontainer">
+            
+                <h2>Delivery addresses and timings</h2>
+                <h3>Drag the marker to destiny location</h3>
+                <div class="map" id="map"></div>
+        
+        </div>
+
+    </form>
+</div>

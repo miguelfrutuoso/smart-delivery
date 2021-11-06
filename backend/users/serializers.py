@@ -5,7 +5,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'user_name', 'password', 'first_name', 'last_name', 'gender')
+        fields = ('email', 'user_name', 'password', 'first_name', 'last_name', 'gender', 'is_admin', 'is_retailer', 'is_driver', 'standart_longitude', 'standart_latitude')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -21,4 +21,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'user_name', 'first_name', 'last_name', 'gender', 'is_admin', 'is_retailer')
+        fields = ('id', 'email', 'user_name', 'first_name', 'last_name', 'gender', 'is_admin', 'is_retailer', 'is_driver', 'standart_longitude', 'standart_latitude')

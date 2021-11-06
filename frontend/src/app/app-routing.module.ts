@@ -14,6 +14,7 @@ import { RouteComponent } from './route/route.component'
 import { AdminOrdersComponent} from './admin-orders/admin-orders.component'
 import { AdminRoutesComponent } from './admin-routes/admin-routes.component'
 import { RecieveOrdersComponent  } from './recieve-orders/recieve-orders.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 import { AuthGuard } from './guards/auth.guard'
 import { IsAdminGuard } from './guards/is-admin.guard'
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'admin-orders', component:AdminOrdersComponent},
   { path: 'admin-routes', component:AdminRoutesComponent},
   { path: 'recive-orders', component:RecieveOrdersComponent},
+  { path: 'create-user', component:CreateUserComponent},
   { path: '**', component: LoginComponent },
 ]
 
