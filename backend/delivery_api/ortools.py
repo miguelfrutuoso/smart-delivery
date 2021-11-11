@@ -2,6 +2,8 @@ from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 import requests
 import sys
+import random
+import math
 
 class Location:
     def __init__(self, longitude, latitude, timing):
@@ -92,7 +94,7 @@ def get_time_matrix(locations):
     """
     Returns a matrix with travel times between the given locations
     """
-    request_string = build_request_string(locations)
+    request_string = build_request_string(locations) 
     # response = requests.get(request_string)
     # print(response.json())
     # response = response.json()
@@ -146,7 +148,10 @@ def print_solution2(data, manager, routing, solution):
         
 
 def build_request_string(locations):
-    
+    '''
+        builds a request with the given locations
+    '''
+
     request_string = 'https://api.mapbox.com/directions-matrix/v1/mapbox/driving/'
     
     for location in locations:
@@ -205,6 +210,92 @@ def vrptw(combinations, start_time):
         break;
 
     return best_solution
+
+def vrptw_optimized(array, start_time):
+    ''' 
+        Calculates the best route given a list of orders with 1 or more delivery options (OTL)
+        Simulated annealing will try to find the best combination of OTL
+    '''
+
+    
+    temperature = 40
+    final_temperature = .1
+    alpha = 0.5
+    current_state, current_state_idx = rand_pick_2d_array(array) # Set random initial state & current_state_idx is an array of selected indexes of the array
+    current_state_cost = formulate_problem(current_state) # cost of current state
+
+    while(1):
+
+        #next_state = rand_pick_2d_array(array) # Pick a random next state 
+
+        next_state = pick_neighbor(array, current_state_idx) # Pick a neighbor
+        next_state_cost = formulate_problem(next_state) # Cost of next state
+
+        cost_diff = next_state_cost - current_state_cost # Cost difference between next and current state
+
+        if cost_diff > 0: # If next_state has less cost than current_state accept it
+            current_state = next_state
+        else: # If not accept it with a given probability
+            if random.uniform(0, 1) < math.exp(-cost_diff /temperature):
+                current_state = next_state
+
+        temperature -= alpha # cool down
+
+        if temperature <= final_temperature: # final temperature
+            return current
+
+        current = rand_pick_2d_array(array) # select random successor
+    
+
+def pick_neighbor(array, idx_array): # Pick a neighbor 
+
+    neighbor = []
+
+    change_id = random.uniform(0, len(array) - 1) # choice random element to change 
+
+    while (len(array[change_id]) == 1): # if the element has 1 of length repeat random choice
+        change_id = random.uniform(0, len(array) - 1)
+
+    for i, idx in array:
+        if idx == change_id: 
+            element = random.uniform(0, len(i))
+            idx_array[idx] = element # change idx array 
+            neighbor.append(i[element]) # change random element
+        else:
+            neighbor.append(i[idx_array[idx]])
+
+    return neighbor, idx_array
+
+def formulate_problem(combination, start_time): 
+    '''
+        formulate a VRPTW problem
+    '''
+    data = {}
+
+    data['time_matrix'] = get_time_matrix(combination)    
+    data['time_windows'] = [(0, 60)]
+
+    for location in combination:
+        data['time_windows'].append(shift_timeinterval(location['timeinterval'], start_time))
+
+    return solve(data)
+
+
+def rand_pick_2d_array(array):
+    '''
+        Returns a 1D array with positions picked reandomly from the given array 
+        and an array with the positions that were picked - idx_array
+    '''
+
+    rand_array = [];
+    idx_array = [];
+
+    for i in array:
+        pick = random.randint(0, len(i) - 1) 
+        rand_array.append(i[pick])
+        idx_array.append(pick)
+    
+    return rand_array, idx_array
 
 def shift_timeinterval(time_interval, start_time):
     return (time_interval[0] - start_time, time_interval[1] - start_time)
