@@ -47,14 +47,15 @@ export class AddOrderComponent implements OnInit {
 	retailer: number;
 	availableDate: NgbDate;
 
+	//map variables
 	map: mapboxgl.Map;
 	style = 'mapbox://styles/mapbox/streets-v11';
-	lat = 0;
-	lng = 0;
+	lat = 39.294580801281825;
+	lng = -7.4307729197902574;
 	marker: mapboxgl.Marker;
 
 	locations: Location[];
-	location: Location;
+	//location: Location;
 	timings: timing[];
 	startTiming: Time;
 	endTiming: Time;
@@ -100,66 +101,45 @@ export class AddOrderComponent implements OnInit {
 		await this.warehouseService.getWarehouses().subscribe(warehouses => this.warehouses = warehouses)
 	}
 
-
-	async taddLocation() { //Final version
+	async addLocation() { 
 		this.timings = [
 			new timing(
 				this.datetimeToString(this.deliveryDate, this.startTiming),
 				this.datetimeToString(this.deliveryDate, this.endTiming),
 		)]
 		
-		this.location = new Location(
+		var location = new Location(
 			this.marker.getLngLat().lat,
 			this.marker.getLngLat().lng,
 			this.timings
 		)
 		
-		if(!this.locationExists(this.locations, this.location) && this.timings != undefined){
-			this.locations.push(this.location)
-			this.changeDetection.detectChanges();
-			console.log(this.locations.length)
-		}	
-		
-		await this.getLocationAddress(this.marker.getLngLat().lng, this.marker.getLngLat().lat)
-		//this.getLocationAddress(-7.429216007254041, 39.28915325077671)
-	}
-
-	async addLocation() { //TEST VERSION
-		
-		this.timings = [
-			new timing(
-				this.datetimeToString(this.deliveryDate, this.startTiming),
-				this.datetimeToString(this.deliveryDate, this.endTiming),
-		)]
-		
-		console.log(this.timings)
-
-		
-		this.location = new Location(
-			-7.429216007254041,
-			39.28915325077671,
-			this.timings
-		)
-		
-		if(!this.locationExists(this.locations, this.location) && this.timings != undefined){
-			this.locations.push(this.location)
-			this.changeDetection.detectChanges();
-			console.log(this.locations.length)
-		}
-		
-		
-		console.log(this.users)
-		await this.getLocationAddress(-7.429216007254041, 39.28915325077671)
-	}
-
-	getLocationAddress(longitude: number, latitude: number) {
-		 this.geocodingService.getAddress(longitude, latitude)
-			.subscribe({next: (data: Address) => this.addressString = {
+		this.geocodingService.getAddress(this.marker.getLngLat().lng, this.marker.getLngLat().lat) // Get place name 
+			.subscribe({next: (data: Address) => location.addressString = {
 				type: data.type,
 				query: data.query,
 				features: data.features,
 				attribution: data.attribution
 			}});
+		
+
+		if(this.timings != undefined){ // add new location to array of locations
+			this.locations.push(location)
+			this.changeDetection.detectChanges();
+		}	
+	}
+
+	async getLocationAddress(longitude: number, latitude: number) {
+		var address: Address;
+		this.geocodingService.getAddress(longitude, latitude)
+		.subscribe({next: (data: Address) => address = {
+			type: data.type,
+			query: data.query,
+			features: data.features,
+			attribution: data.attribution
+		}});
+
+		return address.features[0].place_name
 	}
 
 	locationExists(locations: Location[], location: Location) {
@@ -188,11 +168,11 @@ export class AddOrderComponent implements OnInit {
 			.subscribe(users => this.users = users)
 	}
 
-	dateToString(date: NgbDate,){
+	dateToString(date: NgbDate,){ // tranform NbgDate to String
 		return (date.year + '-' + date.month + '-' + date.day)
 	}
 
-	datetimeToString(date: NgbDate, time: Time){
+	datetimeToString(date: NgbDate, time: Time){ // tranform NbgDate and time to String
 		return (date.year + '-' + date.month + '-' + date.day + ' ' + time)
 	}
 }

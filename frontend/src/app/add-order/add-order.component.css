@@ -183,6 +183,7 @@ select {
     padding: 18px;
     background-color: #f7f7f7;
     max-width: 400px;
+    margin-bottom: 10px;
 }
 
 .locationcords {

@@ -107,27 +107,12 @@
     <div [hidden]="!addDelAdr" class="selectedlocations">
         <h2>Selected locations</h2>
         <h3 *ngIf="locations.length == 0" >No locations have been added yet</h3>
-        <div *ngFor="let location of locations">
-            <h3>{{location.longitude}}</h3>
-            <h3>{{location.latitude}}</h3>
+        <div *ngFor="let location of locations" class="location">
+            <h4>longitude {{location.longitude}}</h4>
+            <h4>latitude {{location.latitude}}</h4>
+            <h3>{{location.addressString.features[0].place_name}}</h3>
         </div>
-        <h3 *ngIf="this.addressString" >{{addressString.features[0].place_name}}</h3>
-    </div> 
-
-    <div class="selectedlocations">
-        <h2>Selected locations</h2>
-        <!-- <h3 *ngIf="locations.length == 0" >No locations have been added yet</h3> -->
-        <div class="location"> 
-            <div class="locationcords">
-                <h4>longitude: 32.22222</h4>
-                <h4>latitude: 12.22222</h4>
-            </div>
-           
-            <h3>'m learning Angular2 and Typescript. I'm working through the Heroes tutorial on angular.io, but applying it to a project I'm converting from ASP.Net </h3>
-        </div>
-        <h3 *ngIf="this.addressString" >{{addressString.features[0].place_name}}</h3>
         
-    </div>
-
+    </div> 
 
 </div>
