@@ -37,7 +37,7 @@ export class RandomDataComponent implements OnInit {
 			for (var j = 0; j < locationsNumber; j++) {
 
 
-				var timingNumber = Math.floor(Math.random() * 3) + 1; //number of timeIntervals for each Location
+				var timingNumber = 1; //number of timeIntervals for each Location
 				var t: Time = { hours: 7, minutes: 0 };
 
 				var times: Array<timing> = new Array(timingNumber)
@@ -66,16 +66,17 @@ export class RandomDataComponent implements OnInit {
 				randLocations[j] = new Location(locations[i].latitude, locations[i].longitude, times)
 			}
 			
-			// order = new Order(
-			// 	1, // TODO RANDOM in users
-			// 	2,
-			// 	this.dateToString(this.dataDay),
-			// 	Math.floor(Math.random() * 10) + 1,
-			// 	randLocations,
-			// 	"Random order"
-			// )
-			// console.log(order)
-			// this.orderService.addOrder(order).subscribe()
+			 order = new Order(
+			 	1, // TODO RANDOM in users
+			 	2,
+				this.dateToString(this.dataDay),
+			 	Math.floor(Math.random() * 10) + 1,
+				randLocations,
+				"Random order",
+				1
+			)
+			console.log(order)
+			this.orderService.addOrder(order).subscribe()
 		}
 
 	}
