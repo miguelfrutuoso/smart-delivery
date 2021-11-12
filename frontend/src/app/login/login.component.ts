@@ -20,7 +20,6 @@ export class LoginComponent {
 	}
 	
 	login() {
-		console.log(this.user)
 		this.authService.login(this.user).subscribe(
 			() => this.router.navigate(['/home'])
 		)
