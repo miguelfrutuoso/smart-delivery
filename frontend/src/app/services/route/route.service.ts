@@ -5,6 +5,8 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import { Order } from 'src/app/models/order';
+import { Time } from '@angular/common';
 
 @Injectable({
 	providedIn: 'root'
@@ -34,6 +36,32 @@ export class RouteService {
 			.pipe(
 				tap(_ => console.log("Service called"))
 			)
+	}
+
+	createRoute(route: Route): Observable<Route>{
+
+		class Routes {
+			id: number;
+			orders: number[];
+			day: string;
+			warehouse: number;
+			start_time: Time;
+
+			constructor(id: number, orders: number[], day: string, warehouse: number, start_time: Time ){
+				this.id = id,
+				this.orders = orders,
+				this.day = day,
+				this.warehouse = warehouse,
+				this.start_time = start_time
+			}
+		}
+		
+		const routes = new Routes(route.id, route.orders.map(a => a.id), route.day, route.warehouse, route.start_time)
+
+		return this.http.post<Route>(this.URL + 'create/', routes)
+		.pipe(
+			tap(_ => console.log("Service called"))
+		)
 	}
 
 	getNLastRoutes(n: number): Observable<Route[]> {

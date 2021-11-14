@@ -1,0 +1,20 @@
+<div class="container">
+    <form>
+        <div class="add-user">
+            <h1>Create warehouse</h1>
+            <div>
+                <input type="name" placeholder="name" class="form__field" [(ngModel)]="warehouse.name" name="name"/>
+            </div>
+            <button class="button" id="create-user" (click)="createWarehouse()"><span>Create warehouse</span></button>
+        </div>
+        
+        <div class="mapcontainer">
+            
+                <h2>Warehouse location</h2>
+                <h3>Drag the marker to set warehouse location</h3>
+                <div class="map" id="map"></div>
+        
+        </div>
+
+    </form>
+</div>

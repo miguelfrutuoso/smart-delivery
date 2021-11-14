@@ -21,7 +21,7 @@ a {
 }
 
 button {
-    width: 250px;
+    width: 280px;
 	background: #f3f0f1;
     margin-bottom: 25px;
     border-radius: 9px;
@@ -75,7 +75,7 @@ button:focus {outline:0;}
 #ButtonContainer {
     margin-top: 35px;
     float: left;
-    width: 20%;
+    width: 25%;
 }
 
 #LastOrdersContainer {
@@ -92,7 +92,7 @@ button:focus {outline:0;}
 
 #routes {
     float: left;
-    width: 40%;
+    width: 35%;
     margin-top: 40px;
     margin-left: 20px;
     border-style: solid;
