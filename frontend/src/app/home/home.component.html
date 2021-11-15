@@ -30,6 +30,7 @@
 
     <div id="orders">
         <h1>Past orders</h1>
+        <p *ngIf="recievedOrders.length == 0">No orders incoming</p>
         <div id="order" *ngFor="let order of recievedOrders">
             <div id="order-id">
                 <p>{{order.id}}</p>
