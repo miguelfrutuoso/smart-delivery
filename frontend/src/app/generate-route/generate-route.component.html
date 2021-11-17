@@ -32,8 +32,15 @@
                 <input type="text" id="distance-radius" placeholder="distance radius" type="radius" [(ngModel)]="radius" name="radius">
             </div>
 
+            <div id="timecontainer">
+                <div id="timecontainer2" class="timecontainer">
+                    <input [ngxTimepicker]="picker1" placeholder="start time" id="startTime" [format]=24 [(ngModel)]="startTime" name="start">
+                    <ngx-material-timepicker #picker1></ngx-material-timepicker>
+                </div>
+            </div>
+
             <button class="search" id="updateOrder" (click)="getOrders()"><span>Search orders</span></button>
-            <button class="search" id="updateOrder" (click)="getOrders()" disabled><span>Generate route</span></button> 
+            <button class="search" id="updateOrder" (click)="generateRoute()" [disabled]="!orders"><span>Generate route</span></button> 
         </form>
 
     </div>

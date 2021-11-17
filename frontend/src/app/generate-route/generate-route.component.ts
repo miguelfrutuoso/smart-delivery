@@ -5,6 +5,9 @@ import { Warehouse } from '../models/warehouse'
 import { Order } from '../models/order'
 import { WarehouseService } from '../services/warehouse/warehouse.service'
 import { OrderService } from '../services/order/order.service'
+import { RouteService } from '../services/route/route.service';
+import { Route } from '../models/route';
+import { Time } from '@angular/common';
 
 @Component({
 	selector: 'app-generate-route',
@@ -14,7 +17,8 @@ import { OrderService } from '../services/order/order.service'
 export class GenerateRouteComponent implements OnInit {
 
 	constructor(private warehouseService: WarehouseService,
-				private orderService: OrderService) { }
+				private orderService: OrderService,
+				private routeService: RouteService) { }
 
 	deliveryDate: NgbDate;
 
@@ -23,9 +27,12 @@ export class GenerateRouteComponent implements OnInit {
 	radius: number;
 
 	orders: Order[];
+	route: Route;
+	startTime: Time;
 
 	ngOnInit(): void {
 		this.getWarehouses()
+		
 	}
 
 	async getWarehouses() {
@@ -37,5 +44,20 @@ export class GenerateRouteComponent implements OnInit {
 		this.orderService.getOrdersByRangeTime(this.radius, this.selectedWarehouse, this.deliveryDate)
 		.subscribe(orders => this.orders = orders)
 		console.log(this.orders)
+	}
+
+	generateRoute() {
+		this.route = new Route()
+		console.log(this.orders)
+		this.route.orders = this.orders;
+		this.route.day = this.dateToString(this.deliveryDate);
+		this.route.start_time = this.startTime;
+		this.route.warehouse = this.selectedWarehouse;
+		
+		this.routeService.createRoute(this.route).subscribe()
+	}
+
+	dateToString(date: NgbDate,){
+		return (date.year + '-' + date.month + '-' + date.day)
 	}
 }
