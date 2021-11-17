@@ -181,7 +181,7 @@ class GetOrdersByRangeTime(generics.ListAPIView):
         warehouse = self.kwargs.get('warehouse')
         range = self.kwargs.get('range')
         warehouse = Warehouse.objects.get(id = warehouse)
-         
+        
         if orders:
             for order in orders:
                 ordertimelocations = order.ordertimelocation.filter()

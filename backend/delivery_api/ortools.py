@@ -47,7 +47,7 @@ def solve(data):
     routing.AddDimension(
         transit_callback_index,
         310,  # allow waiting time
-        400,  # maximum time per vehicle
+        10000,  # maximum time per vehicle
         False,  # Don't force start cumul to zero.
         time)
     time_dimension = routing.GetDimensionOrDie(time)
@@ -56,7 +56,7 @@ def solve(data):
         if location_idx == data['depot']:
             continue
         index = manager.NodeToIndex(location_idx)
-        print(time_window[0])
+        print("time_window", time_window[0])
         time_dimension.CumulVar(index).SetMin(time_window[0])
         time_dimension.CumulVar(index).SetMax(time_window[1])
         #time_dimension.CumulVar(index).SetRange(time_window[0], time_window[1])
@@ -64,8 +64,7 @@ def solve(data):
     depot_idx = data['depot']
     for vehicle_id in range(data['num_vehicles']):
         index = routing.Start(vehicle_id)
-        time_dimension.CumulVar(index).SetRange(
-            data['time_windows'][depot_idx][0], data['time_windows'][depot_idx][1])
+        time_dimension.CumulVar(index).SetRange(data['time_windows'][depot_idx][0], data['time_windows'][depot_idx][1])
 
     # Instantiate route start and end times to produce feasible times.
     for i in range(data['num_vehicles']):
@@ -95,11 +94,9 @@ def get_time_matrix(locations):
     Returns a matrix with travel times between the given locations
     """
     request_string = build_request_string(locations) 
-    # response = requests.get(request_string)
-    # print(response.json())
-    # response = response.json()
-    print("RESPONSE")
-    response = {'code': 'Ok', 'durations': [[0.0, 117.7, 189.1, 20.0, 3055.0, 3068.5, 400.1, 137.9, 192.2], [117.7, 0.0, 71.4, 97.7, 3172.7, 3186.2, 282.4, 20.2, 74.5], [189.1, 71.4, 0.0, 169.1, 3244.1, 3257.6, 211.0, 51.2, 3.1], [20.0, 97.7, 169.1, 0.0, 3075.0, 3088.5, 380.1, 117.9, 172.2], [3051.0, 3168.7, 3240.1, 3071.0, 0.0, 13.5, 3451.1, 3188.9, 3243.2], [3064.5, 3182.2, 3253.6, 3084.5, 13.5, 0.0, 3464.6, 3202.4, 3256.7], [400.1, 282.4, 211.0, 380.1, 3455.1, 3468.6, 0.0, 262.2, 207.9], [137.9, 20.2, 51.2, 117.9, 3192.9, 3206.4, 262.2, 0.0, 54.3], [192.2, 74.5, 3.1, 172.2, 3247.2, 3260.7, 207.9, 54.3, 0.0]], 'destinations': [{'distance': 29.621416122, 'name': '', 'location': [39.290993, -7.434512]}, {'distance': 37.088965012, 'name': '', 'location': [39.292153, -7.431918]}, {'distance': 276.00366045, 'name': '', 'location': [39.292469, -7.430168]}, {'distance': 461.867488997, 'name': '', 'location': [39.291138, -7.434035]}, {'distance': 292.553633949, 'name': '', 'location': [39.280426, -7.424846]}, {'distance': 430.247996107, 'name': '', 'location': [39.281058, -7.424927]}, {'distance': 161.331688985, 'name': '', 'location': [39.293028, -7.424961]}, {'distance': 600.021574263, 'name': '', 'location': [39.292279, -7.431431]}, {'distance': 931.316213815, 'name': '', 'location': [39.292476, -7.430091]}], 'sources': [{'distance': 29.621416122, 'name': '', 'location': [39.290993, -7.434512]}, {'distance': 37.088965012, 'name': '', 'location': [39.292153, -7.431918]}, {'distance': 276.00366045, 'name': '', 'location': [39.292469, -7.430168]}, {'distance': 461.867488997, 'name': '', 'location': [39.291138, -7.434035]}, {'distance': 292.553633949, 'name': '', 'location': [39.280426, -7.424846]}, {'distance': 430.247996107, 'name': '', 'location': [39.281058, -7.424927]}, {'distance': 161.331688985, 'name': '', 'location': [39.293028, -7.424961]}, {'distance': 600.021574263, 'name': '', 'location': [39.292279, -7.431431]}, {'distance': 931.316213815, 'name': '', 'location': [39.292476, -7.430091]}]}
+    response = requests.get(request_string)
+    response = response.json()
+    #response = {'code': 'Ok', 'durations': [[0.0, 117.7, 189.1, 20.0, 3055.0, 3068.5, 400.1, 137.9, 192.2], [117.7, 0.0, 71.4, 97.7, 3172.7, 3186.2, 282.4, 20.2, 74.5], [189.1, 71.4, 0.0, 169.1, 3244.1, 3257.6, 211.0, 51.2, 3.1], [20.0, 97.7, 169.1, 0.0, 3075.0, 3088.5, 380.1, 117.9, 172.2], [3051.0, 3168.7, 3240.1, 3071.0, 0.0, 13.5, 3451.1, 3188.9, 3243.2], [3064.5, 3182.2, 3253.6, 3084.5, 13.5, 0.0, 3464.6, 3202.4, 3256.7], [400.1, 282.4, 211.0, 380.1, 3455.1, 3468.6, 0.0, 262.2, 207.9], [137.9, 20.2, 51.2, 117.9, 3192.9, 3206.4, 262.2, 0.0, 54.3], [192.2, 74.5, 3.1, 172.2, 3247.2, 3260.7, 207.9, 54.3, 0.0]], 'destinations': [{'distance': 29.621416122, 'name': '', 'location': [39.290993, -7.434512]}, {'distance': 37.088965012, 'name': '', 'location': [39.292153, -7.431918]}, {'distance': 276.00366045, 'name': '', 'location': [39.292469, -7.430168]}, {'distance': 461.867488997, 'name': '', 'location': [39.291138, -7.434035]}, {'distance': 292.553633949, 'name': '', 'location': [39.280426, -7.424846]}, {'distance': 430.247996107, 'name': '', 'location': [39.281058, -7.424927]}, {'distance': 161.331688985, 'name': '', 'location': [39.293028, -7.424961]}, {'distance': 600.021574263, 'name': '', 'location': [39.292279, -7.431431]}, {'distance': 931.316213815, 'name': '', 'location': [39.292476, -7.430091]}], 'sources': [{'distance': 29.621416122, 'name': '', 'location': [39.290993, -7.434512]}, {'distance': 37.088965012, 'name': '', 'location': [39.292153, -7.431918]}, {'distance': 276.00366045, 'name': '', 'location': [39.292469, -7.430168]}, {'distance': 461.867488997, 'name': '', 'location': [39.291138, -7.434035]}, {'distance': 292.553633949, 'name': '', 'location': [39.280426, -7.424846]}, {'distance': 430.247996107, 'name': '', 'location': [39.281058, -7.424927]}, {'distance': 161.331688985, 'name': '', 'location': [39.293028, -7.424961]}, {'distance': 600.021574263, 'name': '', 'location': [39.292279, -7.431431]}, {'distance': 931.316213815, 'name': '', 'location': [39.292476, -7.430091]}]}
     response = response['durations']
     response = time_matrix_sec_to_hour(response)
 
@@ -155,7 +152,6 @@ def build_request_string(locations):
     request_string = 'https://api.mapbox.com/directions-matrix/v1/mapbox/driving/'
     
     for location in locations:
-        print("locations", location['longitude'])
         request_string += str(location['longitude']) + \
             ',' + str(location['latitude'])
         if location == locations[-1]:
@@ -176,7 +172,7 @@ def time_matrix_sec_to_hour(time_matrix):
 
     return time_matrix
 
-def vrptw(combinations, start_time):
+def vrptw(combinations, start_time, starting_point):
     '''
     Calculates the best route based on a set of combinations
     start_time - minutes
@@ -190,11 +186,14 @@ def vrptw(combinations, start_time):
 
         data = {}
 
+        combination = (starting_point,) + combination
+
         data['time_matrix'] = get_time_matrix(combination)
+        
         data['time_windows'] = [(0, 60)]
-        for location in combination:
+        for location in combination[1:]: # skip depot
             data['time_windows'].append(shift_timeinterval(location['timeinterval'], start_time))
-            
+
         data['num_vehicles'] = 1
         data['depot'] = 0   
 
@@ -206,8 +205,9 @@ def vrptw(combinations, start_time):
             best_solution['total_time'] = solution['total_time']
 
         print(best_solution)
+        break
 
-        break;
+        
 
     return best_solution
 

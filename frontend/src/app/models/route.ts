@@ -4,7 +4,7 @@ import {Order} from './order'
 export class Route {
     id: number;
     orders: Order[];
-    day: Date;
+    day: string;
     warehouse: number;
     start_time: Time;
 }

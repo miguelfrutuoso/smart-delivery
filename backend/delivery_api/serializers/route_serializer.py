@@ -4,7 +4,7 @@ from .time_interval_serializer import timeIntervalSerializer
 from .order_serializer import OrderSerializer
 import numpy as np
 from itertools import product
-from ..ortools import vrptw
+from ..ortools import vrptw, vrptw_optimized
 
 class routeSerializer(serializers.ModelSerializer):
 
@@ -24,10 +24,16 @@ class routeSerializer(serializers.ModelSerializer):
 
         orders = []
 
-        for order_data in validated_data['orders']:
-            
+        warehouse = {}
+        warehouse['latitude'] = getattr(route_subset['warehouse'], 'latitude')
+        warehouse['longitude'] = getattr(route_subset['warehouse'], 'longitude')
+        
+        print(len(validated_data['orders']))
+        
+        idx = 0
+
+        for order_data in validated_data['orders']: #build orders with otl's array
             order = list(orderTimelocation.objects.filter(order=order_data).prefetch_related('time_interval').values('id', 'latitude', 'longitude', 'order_id', 'timeinterval'))
-            
             for otl in order:
                 interval = list(timeInterval.objects.filter(id=otl['timeinterval']).values('start', 'end'))
                 interval = (interval[0]['start'], interval[0]['end'])
@@ -40,12 +46,13 @@ class routeSerializer(serializers.ModelSerializer):
         for combination in product(*orders): #Build all cominations possible
             combinations.append(combination)
 
-        opt_route = vrptw(combinations, 420)
-
+        opt_route = vrptw(combinations, 420, warehouse)
+        print(opt_route)
         for idx, order in enumerate(opt_route['route']):
-            Order.objects.filter(id=order['order_id']).update(route=route, state=Order.State.READYDIS)
-            orderTimelocation.objects.filter(id=order['id']).update(selected=True, nth_order=idx)
-
+            if (idx != 0):
+                Order.objects.filter(id=order['order_id']).update(route=route, state=Order.State.READYDIS)
+                orderTimelocation.objects.filter(id=order['id']).update(selected=True, nth_order=idx)
+        #vrptw_optimized(orders)
         return route
       
 

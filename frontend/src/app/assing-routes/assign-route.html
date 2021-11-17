@@ -1,0 +1,14 @@
+<div id="choose-driver">
+    <h2>Choose the driver</h2>
+    <div>
+        <select [(ngModel)]="selectedDriver" required name="selectedWarehouse">
+            <option value="" disabled selected>Select warehouse</option>
+            <option *ngFor="let driver of drivers" [value]="driver.id">{{driver.first_name + ' ' + driver.last_name}}
+            </option>
+        </select>
+    </div>
+</div>
+<mat-dialog-actions align="end">
+    <button class="button" id="confirm" (click)="assign(selectedDriver, this.data.routeId)" mat-dialog-close><span>Assign</span></button>
+    <button class="button" id="cancel" (click)="closeDialog(false)"><span>Cancel</span></button>
+</mat-dialog-actions>

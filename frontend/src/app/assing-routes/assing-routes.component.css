@@ -1,0 +1,137 @@
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: #00D0B2;
+}
+
+h2 {
+    font-family: 'Nunito-Regular', sans-serif;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    font-family: 'Nunito-Regular', sans-serif;
+    font-size: x-large;
+}
+
+tr {
+    font-family: 'Nunito-Light', sans-serif;
+}
+
+tbody {
+    margin-top: 10px;
+}
+
+.container {
+    max-width: unset;
+    width: 70%;
+    margin-top: 20px;
+}
+
+#warehouse {
+    width: 25%;
+}
+
+#day {
+    width: 25%;
+}
+
+#start {
+    width: 25%;
+}
+
+#accept {
+    width: 25%;
+}
+
+.buttons {
+    float: left;
+    width: 30%;
+}
+
+
+#routes{
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+    border-style: solid;
+    border-color: rgb(195, 195, 195);
+    border-radius: 10px;
+    border-width: 1px;
+    background-color: #fbfbfb;
+}
+
+
+.button {
+	background: #f3f0f1;
+    border-radius: 32px;
+	text-align: center;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+	box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+    color: #6f6cde;
+	border-color: transparent;
+    position:relative;
+    top: -18px;
+}
+
+.button span {
+	line-height: 40px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 22px;
+	font-weight: semibold; 
+	margin: 1cm;
+}
+
+.button:hover {
+	opacity: 0.3;
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+	opacity: 1;
+        box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+          inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+        color: #79e3b6;
+}
+
+.button:focus {outline:0;}
+
+select {
+    font-family: 'Nunito-light', sans-serif;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border:1px; 
+	border:1px solid rgb(195, 195, 195);
+    border-radius:10px;
+    padding-left: 10px;
+    height: 40px;
+    background: #f3f0f1;
+    width: 235px;
+    margin-bottom: 10px;
+}
+
+#dialog {
+    max-width: unset;
+    width: 70%;
+} 
+
+#choose-driver{
+    width: 50%;
+}
+
+#buttons {
+    width: 50%;
+    
+}
+
+#cancel {
+    color: #ff0000;
+}
+
+#confirm {
+    color: #00c321;
+    margin-right: 15px;
+}

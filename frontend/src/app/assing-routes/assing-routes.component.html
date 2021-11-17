@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Assign routes</h1>
+    <div id="routes" *ngFor="let route of routes">
+        <div class="table-header">
+            <table>
+                <thead>
+                    <tr>
+                        <th id="warehouse">Warehouse</th>
+                        <th id="day">Day</th>
+                        <th id="start">Start</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{getWarehouseName(route.warehouse)}}</td>
+                        <td>{{route.day}}</td>
+                        <td>{{route.start_time}}</td>
+                        <td id="assign-td"><button class="button" id="assign" (click)="assignRoute(route, drivers)"><span>Assign</span></button></td>
+                    </tr>
+                </tbody> 
+            </table>
+        </div>
+    </div>
+    <div *ngIf="routes.length == 0">
+        <h2>No unassigned routes were found</h2>
+    </div>
+</div>
+
+

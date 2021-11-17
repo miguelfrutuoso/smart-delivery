@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Order } from 'src/app/models/order';
 import { Time } from '@angular/common';
+import { User } from 'src/app/models/user';
 
 @Injectable({
 	providedIn: 'root'
@@ -38,6 +39,10 @@ export class RouteService {
 			)
 	}
 
+	getNonAssignedRoutes() : Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'notassigned/')
+	}
+
 	createRoute(route: Route): Observable<Route>{
 
 		class Routes {
@@ -62,6 +67,10 @@ export class RouteService {
 		.pipe(
 			tap(_ => console.log("Service called"))
 		)
+	}
+
+	assignRoute(driver: number, route: number): Observable<Route> {
+		return this.http.put<Route>(this.URL + 'assign/' + route + '/' + driver, this.httpOptions)
 	}
 
 	getNLastRoutes(n: number): Observable<Route[]> {

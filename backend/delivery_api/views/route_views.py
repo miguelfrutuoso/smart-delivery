@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..permissions import isAdminPermission
 import datetime
+from django.http import HttpResponse
 
 class GetRoutes(generics.ListAPIView):
     '''
@@ -99,3 +100,30 @@ class GetRoutesByWarehouse(generics.ListAPIView):
     def get_queryset(self):
         wh = self.kwargs.get('wh')
         return Route.objects.filter(warehouse= wh)
+
+class GetNonAssignedRoutes(generics.ListAPIView):
+    ''' 
+        Get non assigned routes
+    '''
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        wh = self.kwargs.get('wh')
+        return Route.objects.filter(driver__isnull= True)
+
+class AssignRoute(generics.UpdateAPIView):
+    '''
+        Assign a route to a driver 
+    '''
+    permission_classes = [isAdminPermission]
+    authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def put(self, request, *args, **kwargs):
+        driver = self.kwargs.get('driver')
+        route = self.kwargs.get('route')
+        return HttpResponse(Route.objects.filter(id = route).update(driver=driver))

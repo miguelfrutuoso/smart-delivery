@@ -5,26 +5,30 @@ import { User } from '../../models/user'
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class GetUsersService {
 
-  readonly URL = environment.apiUrl + "user/"
+	readonly URL = environment.apiUrl + "user/"
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
 
-  getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.URL + "allUsers/")
-    .pipe(
-			tap(_ => console.log("Service called"))
-		)
-  }
+	getUsers(): Observable<User[]> {
+		return this.http.get<User[]>(this.URL + "allUsers/")
+			.pipe(
+				tap(_ => console.log("Service called"))
+			)
+	}
 
-  getUserDetail(id: number): Observable<User>{
-    return this.http.get<User>(this.URL + "userDetail/" + id)
-    .pipe(
-			tap(_ => console.log("Service called"))
-		)
-  }
+	getUserDetail(id: number): Observable<User> {
+		return this.http.get<User>(this.URL + "userDetail/" + id)
+			.pipe(
+				tap(_ => console.log("Service called"))
+			)
+	}
+
+	getDrivers(): Observable<User[]> {
+		return this.http.get<User[]>(this.URL + "drivers/")
+	}
 }
