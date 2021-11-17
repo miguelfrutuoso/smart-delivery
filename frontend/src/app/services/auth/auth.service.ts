@@ -43,9 +43,10 @@ export class AuthService {
 	}
 
 	logout() {
+		this.logoutUser()
 		return this.http.post<any>(this.URL + 'user/logout/blacklist/', {refresh_token: localStorage.getItem('refresh_token')})
 			.pipe(
-				tap(() => this.logoutUser())
+				
 			)
 	}
 	

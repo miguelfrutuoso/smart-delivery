@@ -33,10 +33,6 @@ import { RecieveOrdersComponent } from './recieve-orders/recieve-orders.componen
 import { DatePipe } from '@angular/common';
 import { DriverMenuComponent } from './driver-menu/driver-menu.component';
 import { CreateUserComponent } from './create-user/create-user.component';
-import { AnonymousLayoutComponent } from './anonymous-layout/anonymous-layout.component';
-import { AuthenticatedLayoutComponent } from './authenticated-layout/authenticated-layout.component';
-import { ClientLayoutComponent } from './client-layout/client-layout.component';
-import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
 import { AssignRouteDialog, AssingRoutesComponent } from './assing-routes/assing-routes.component';
 
@@ -63,10 +59,6 @@ import { AssignRouteDialog, AssingRoutesComponent } from './assing-routes/assing
     ForceCustomDialog,
     DriverMenuComponent,
     CreateUserComponent,
-    AnonymousLayoutComponent,
-    AuthenticatedLayoutComponent,
-    ClientLayoutComponent,
-    AdminLayoutComponent,
     CreateWarehouseComponent,
     AssingRoutesComponent,
     AssignRouteDialog
@@ -89,7 +81,7 @@ import { AssignRouteDialog, AssingRoutesComponent } from './assing-routes/assing
       useClass: AuthInterceptor,
       multi: true
     },
-    DatePipe],
+    DatePipe,],
   entryComponents: [MatDialogModule],
   bootstrap: [AppComponent],
 })

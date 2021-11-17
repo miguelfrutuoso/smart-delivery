@@ -15,30 +15,19 @@ export class AuthGuard implements CanActivate {
 
 	}
 
-	canActivate() {
-		if (this.authService.isLoggedIn()) {
-			this.router.navigate(['/home']);
-		}
-    
-		return !this.authService.isLoggedIn();
+	canActivate(
+		next: ActivatedRouteSnapshot,
+		state: RouterStateSnapshot
+	) {
+		if (!this.authService.isLoggedIn()) {
+			this.router.navigate(['login']);
+			//window.location.reload();
+			console.log("nav to login")
+		}	
+		console.log("logged in - " + this.authService.isLoggedIn())
+		return this.authService.isLoggedIn();
 	}
 
 }
 
-export class isAdmin implements CanActivate {
 
-	constructor(private authService: AuthService, private router: Router) {}
-
-	canActivate() {
-
-		var userLogged: User;
-		this.authService.getUserLogged().subscribe(user => userLogged = user)
-
-		if (userLogged.is_admin) {
-			this.router.navigate(['/home']);
-		}
-		
-		return false
-	}
-
-}

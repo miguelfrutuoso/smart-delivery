@@ -24,49 +24,39 @@ export class RandomDataComponent implements OnInit {
 	dataDay: NgbDate;
 	orderNumber: number;
 
-	createRandomOrders() {
+	createRandomOrders(orderNumber: number) {
 		var locations: { longitude: number, latitude: number }[] = this.shuffle(LOCATIONS)
 
-		for (var i = 0; i < this.orderNumber; i++) {
+		for (var i = 0; i < orderNumber; i++) {
 
-			var locationsNumber = Math.floor(Math.random() * 3) + 1;
+			var locationsNumber = Math.floor(Math.random() * 3) + 1; // number of locations of ith order
 
-			var randLocations: Array<Location> = new Array(locationsNumber);
+			var randLocations: Array<Location> = new Array(locationsNumber); // locations of ith order
 			var order: Order;
 
 			for (var j = 0; j < locationsNumber; j++) {
 
 
-				var timingNumber = 1; //number of timeIntervals for each Location
 				var t: Time = { hours: 7, minutes: 0 };
 
-				var times: Array<timing> = new Array(timingNumber)
+				var times: Array<timing> = []
 
-				for (var c = 0; c < timingNumber; c++) {
-
-					var startTiming: Time;
-					if (c == 0)
-						startTiming = this.randomTimeGenerator(t, 15)
-					else
-						startTiming = this.randomTimeGenerator(t, 20)
-
-					t.hours = startTiming.hours + Math.floor(Math.random() * 5) + 1;
+				var startTiming: Time = this.randomTimeGenerator(t, 15)
 					
-					if (t.hours >= 20 || startTiming.hours >= 20){
-						times = times.slice(0, c)					
-						break;
-					} 
-						
-
-					times[c] = new timing(this.datetimeToString(this.dataDay, startTiming), this.datetimeToString(this.dataDay, t))
-	
+				var shft: Time = {
+					hours: startTiming.hours + 1,
+					minutes: 0
 				}
-				i++;
+
+				var endTiming: Time = this.randomTimeGenerator(shft, 20)
+
+				times.push(new timing(this.datetimeToString(this.dataDay, startTiming), this.datetimeToString(this.dataDay, endTiming)))
 				
 				randLocations[j] = new Location(locations[i].latitude, locations[i].longitude, times)
+				i++;
 			}
 			
-			 order = new Order(
+			order = new Order(
 			 	1, // TODO RANDOM in users
 			 	2,
 				this.dateToString(this.dataDay),

@@ -75,7 +75,62 @@ export class RouteComponent implements OnInit {
 		});
 		var coordenadas = []
 
+		this.routeService.getRoute(this.id).subscribe(
+			route => {
+				this.route = this.filterSortRoute(route);
+				//this.getOrderDetails()
+				console.log(this.route)
+				this.getOrdersAddress(this.route.orders) // get orders's adresses
 
+				for(let order of this.route.orders) {
+					coordenadas.push(order.ordertimelocation[0].longitude + ', ' + order.ordertimelocation[0].latitude)
+				}
+				//create markers
+				this.markers = {type: 'FeatureCollection', features : []}
+				for(const [i, coordenate] of coordenadas.entries()){
+					this.markers.features.push(
+						{
+							type: 'Feature',
+							properties: {
+								id: i+1,
+								message: 'Point',
+								iconSize: [30, 30]
+							},
+							geometry: {
+								type: 'Point',
+								coordinates: [coordenate.split(",").map(Number)[0], coordenate.split(",").map(Number)[1]]
+							}
+						}
+					)
+				}
+				
+				for(const marker of this.markers.features) {
+					const width = marker.properties.iconSize[0];
+					const height = marker.properties.iconSize[1];
+					const number = document.createTextNode(marker.properties.id.toString());
+					const el = document.createElement('div');
+					el.appendChild(number)
+					el.style.backgroundColor = '#0076FF'
+					el.style.paddingTop = '5px';
+    				el.style.paddingLeft = '9px';
+					el.className = 'marker';
+					el.style.borderRadius = '50%'
+					el.style.width = `${width}px`;
+					el.style.height = `${height}px`;
+					el.style.backgroundSize = '100%';
+					el.className = 'marker';
+					el.style.fontFamily = "Nunito"
+					el.style.fontSize = "19px"
+					el.style.color = '#fff'
+					new mapboxgl.Marker(el)
+					.setLngLat(marker.geometry.coordinates)
+					.addTo(this.map)
+				}
+			}
+			
+		)
+
+/*
 		this.routeService.getRoute(this.id)
 		.subscribe(route => this.route = route,
 			() => this.getOrderDetails(),
@@ -127,7 +182,7 @@ export class RouteComponent implements OnInit {
 					.addTo(this.map)
 				}
 			}
-		)
+		)*/
 	
 		Object.getOwnPropertyDescriptor(mapboxgl, "accessToken").set('pk.eyJ1IjoibWlndWVsZnJ1dHVvc28iLCJhIjoiY2txdjljYWVpMDllNzJ6cDYzazg2dmhoZiJ9.2wSd1RH1bT_aKfCZaAdtVg');
 		this.map = new mapboxgl.Map({
@@ -151,35 +206,30 @@ export class RouteComponent implements OnInit {
 		
 	}
 
-	async getOrderDetails(){
-		await this.orderService.getOrdersByIDs(this.route.orders)
+	getOrderDetails(){
+		console.log(this.route.orders)
+		this.orderService.getOrdersByIDs(this.route.orders)
 		.subscribe(orders => this.route.orders = orders)
 	}
 
-	filterSortOTL(orders: Order[]) {
-		for (let order of orders){
+	filterSortRoute(route: Route) {
+
+		for (let order of route.orders){ // TODO o que é que isto tá aqui a fazer????
 			for (let otl of order.ordertimelocation)
 				if (otl.selected)
 			 		order.ordertimelocation = [otl]
 		}
-		
-		var sortedOrders: Order[] = []
-		var min = 0
+		route.orders.sort(this.compare)
 
-		while(min != orders.length -1){
-			for(let i = 0; i<orders.length; i++){
-				if(orders[i].ordertimelocation[0].nth_order == min){
-					sortedOrders.push(orders[i])
-					min++;
-					i = 0;
-					break;
-				}
-			}
-		}
+		return route
+	}
 
-		this.getOrdersAddress(this.route.orders)
-
-		return sortedOrders
+	compare(a:Order, b:Order) { // function to order locations
+		if(a.ordertimelocation[0].nth_order > b.ordertimelocation[0].nth_order)
+			return 1
+		if(a.ordertimelocation[0].nth_order < b.ordertimelocation[0].nth_order)
+			return -1
+		return 0
 	}
 
 	async getOrdersAddress(orders: Order[]){
