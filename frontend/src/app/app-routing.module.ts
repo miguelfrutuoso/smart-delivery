@@ -23,10 +23,12 @@ import { AuthenticatedLayoutComponent } from './authenticated-layout/authenticat
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
+import { DriverMenuComponent } from './driver-menu/driver-menu.component';
+import { AssingRoutesComponent } from './assing-routes/assing-routes.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent , canActivate:[!AuthGuard]},
   { path: 'singin', component: RegisterComponent },
   { path: 'notfound', component: PageNotFoundComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate:[IsAdminGuard] },
@@ -42,7 +44,10 @@ const routes: Routes = [
   { path: 'recive-orders', component:RecieveOrdersComponent, canActivate:[IsAdminGuard]},
   { path: 'create-user', component:CreateUserComponent, canActivate:[IsAdminGuard]},
   { path: 'create-warehouse', component: CreateWarehouseComponent, canActivate:[IsAdminGuard]},
-  { path: '**', component: LoginComponent },
+  { path: 'driver-menu', component:DriverMenuComponent},
+  { path: 'assign-routes', component: AssingRoutesComponent},
+  { path: '', component: LoginComponent },
+  { path: '**', component: PageNotFoundComponent },
   //{ path: '**', component: PageNotFoundComponent },
 ]
 

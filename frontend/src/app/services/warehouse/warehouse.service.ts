@@ -21,5 +21,7 @@ export class WarehouseService {
 		)
 	}
 
-
+	createWarehouse(warehouse: Warehouse): Observable<Warehouse> {
+		return this.http.post<Warehouse>(this.URL + 'create/', warehouse)
+	}
 }

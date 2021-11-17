@@ -38,6 +38,7 @@ import { AuthenticatedLayoutComponent } from './authenticated-layout/authenticat
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.component';
+import { AssignRouteDialog, AssingRoutesComponent } from './assing-routes/assing-routes.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,8 @@ import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.co
     ClientLayoutComponent,
     AdminLayoutComponent,
     CreateWarehouseComponent,
+    AssingRoutesComponent,
+    AssignRouteDialog
   ],
   imports: [
     BrowserModule,
@@ -87,6 +90,7 @@ import { CreateWarehouseComponent } from './create-warehouse/create-warehouse.co
       multi: true
     },
     DatePipe],
+  entryComponents: [MatDialogModule],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
