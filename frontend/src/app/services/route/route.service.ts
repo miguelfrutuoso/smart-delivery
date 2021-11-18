@@ -88,6 +88,18 @@ export class RouteService {
 		return this.http.get<Route[]>(this.URL + 'filter/warehouse/' + warehouse)
 	}
 
+	getTodayDriverRoute(driver: User): Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'todayroute/' + driver.id)
+	}
+
+	getPastDriverRoute(driver: User): Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'pastroutes/' + driver.id)
+	}
+	
+	getNextDriverRoute(driver: User): Observable<Route[]> {
+		return this.http.get<Route[]>(this.URL + 'nextroutes/' + driver.id)
+	}
+
 	dateToStringWithZeros(date: NgbDate){
 		var zero = ""
 		var day_zero = ""

@@ -41,7 +41,7 @@ const routes: Routes =  [
   { path: 'recive-orders', component:RecieveOrdersComponent, canActivate:[IsAdminGuard]},
   { path: 'create-user', component:CreateUserComponent, canActivate:[IsAdminGuard]},
   { path: 'create-warehouse', component: CreateWarehouseComponent, canActivate:[IsAdminGuard]},
-  { path: 'driver-menu', component:DriverMenuComponent, canActivate:[IsAdminGuard]},
+  { path: 'driver-menu', component:DriverMenuComponent},
   { path: 'assign-routes', component: AssingRoutesComponent, canActivate:[IsAdminGuard]},
   { path: '', component: LoginComponent, canActivate:[GestGuard]  },
   { path: '**', component: PageNotFoundComponent },

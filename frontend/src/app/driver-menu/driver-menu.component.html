@@ -1,0 +1,97 @@
+<div class="container">
+    <div id="welcome">
+        <div id="welcome-text">
+            <h1>Welcome driver {{driver.user_name}}</h1>
+        </div>
+        <div id="clock">
+            <p> {{ rxTime | date: 'dd/MM/yyyy hh:mm:ss' }}</p>
+        </div>
+    </div>
+    
+    <div class="routes">
+        <h2>Today route</h2>
+        <div id="routes" *ngFor="let route of pastRoutes">
+            <div class="table-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="warehouse">Warehouse</th>
+                            <th id="time-to-stary">Time</th>
+                            <th id="start">Start</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr>
+                            <td>{{getWarehouseName(route.warehouse)}}</td>
+                            <td>{{route.day}}</td>
+                            <td>{{route.start_time}}</td>
+                            <td id="assign-td"><button class="button" id="assign" (click)="assignRoute(route, drivers)"><span>Assign</span></button></td>
+                        </tr> -->
+                    </tbody> 
+                </table>
+            </div>
+        </div>
+        <div *ngIf="todayRoutes.length == 0">
+            <h3>No today routes were found</h3>
+        </div>
+    </div>
+
+    <div class="routes">
+        <h2>Past routes</h2>
+        <div id="routes" *ngFor="let route of pastRoutes">
+            <div class="table-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="warehouse">Warehouse</th>
+                            <th id="time-to-stary">Time to start</th>
+                            <th id="start">Start</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{route.warehouse}}</td>
+                            <td>{{route.day}}</td>
+                            <td>{{route.start_time}}</td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div>
+            
+        </div>
+        <div *ngIf="pastRoutes.length == 0">
+            <h3>No past routes were found</h3>
+        </div>
+    </div>
+
+    <div class="routes">
+        <h2>Next Routes</h2>
+        <div id="routes" *ngFor="let route of nextRoutes">
+            <div class="table-header">
+                <table>
+                    <thead>
+                        <tr>
+                            <th id="warehouse">Warehouse</th>
+                            <th id="time-to-stary">Time to start</th>
+                            <th id="start">Start</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{route.warehouse}}</td>
+                            <td>{{route.day}}</td>
+                            <td>{{route.start_time}}</td>
+                        </tr>
+                    </tbody> 
+                </table>
+            </div>
+        </div>
+        <div *ngIf="nextRoutes.length == 0">
+            <h3>No unassigned routes were found</h3>
+        </div>
+    </div>
+</div>
+
+
+
+

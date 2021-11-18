@@ -1,7 +1,7 @@
 from django.urls import path, include, register_converter, re_path
 from .views.order_views import CreateOrder, GetOrders, GetOrder, UpdateOrder, GetOrdersByRangeTime, GetOrdersByIDs, GetAllOrders, GetNLastOrders, GetFilteredOrders, GetProcessingOrders, AcceptOrder, TryChange  
 from .views.warehouse_views import GetWarehouses, CreateWarehouse, GetWarehouseByID
-from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails, GetNLastRoutes, GetFilteredRoutes, GetNonAssignedRoutes, AssignRoute
+from .views.route_views import GetRoutes, CreateRoute, CreateManualRoute, GetRoute, GetRouteWithDetails, GetNLastRoutes, GetFilteredRoutes, GetNonAssignedRoutes, AssignRoute, TodayDriverRoutes, PastDriverRoutes, NextDriverRoutes
 from .views import GetRoutesByWarehouse, RejectOrder, GetRecievedOrders, GetInDistributionOrders
 from datetime import datetime
 
@@ -51,7 +51,10 @@ route_patterns = ([
     path('filter/<yyyy:date_min>/<yyyy:date_max>/<int:by>', GetFilteredRoutes.as_view(), name='filteredroutes'),
     path('filter/warehouse/<int:wh>', GetRoutesByWarehouse.as_view(), name='routesbywarehouse'),
     path('notassigned/', GetNonAssignedRoutes.as_view(), name='notassignedroutes'),
-    path('assign/<int:route>/<int:driver>', AssignRoute.as_view(), name='assignroute')
+    path('assign/<int:route>/<int:driver>', AssignRoute.as_view(), name='assignroute'),
+    path('todayroute/<int:driver>', TodayDriverRoutes.as_view(), name='todaydriverroutes'),
+    path('pastroutes/<int:driver>', PastDriverRoutes.as_view(), name='pastdriverroutes'), 
+    path('nextroutes/<int:pk>', NextDriverRoutes.as_view(), name='nextdriverroutes')
 ], 'route')
 
 urlpatterns = [

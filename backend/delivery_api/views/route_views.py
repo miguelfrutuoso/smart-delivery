@@ -1,10 +1,11 @@
 from rest_framework import viewsets, filters, generics, permissions
 from delivery.models import Route
+from users.models import User
 from ..serializers import routeSerializer, routeWithDetailsSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..permissions import isAdminPermission
-import datetime
+from datetime import datetime
 from django.http import HttpResponse
 
 class GetRoutes(generics.ListAPIView):
@@ -69,7 +70,7 @@ class GetNLastRoutes(generics.ListAPIView):
 
     def get_queryset(self):
         n = self.kwargs.get('n')
-        return Route.objects.filter(day__gte = datetime.date.today()).order_by('day')[:n]
+        return Route.objects.filter(day__gte = datetime.today()).order_by('day')[:n]
 
 class GetFilteredRoutes(generics.ListAPIView):
     '''
@@ -127,3 +128,40 @@ class AssignRoute(generics.UpdateAPIView):
         driver = self.kwargs.get('driver')
         route = self.kwargs.get('route')
         return HttpResponse(Route.objects.filter(id = route).update(driver=driver))
+
+class TodayDriverRoutes(generics.ListAPIView):
+    '''
+        Get today's driver routes
+    '''
+    #permission_classes = [isAdminPermission]
+    #authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        driver = self.kwargs.get('driver')
+        return Route.objects.filter(driver = driver, day=datetime.today())
+
+class PastDriverRoutes(generics.ListAPIView):
+    '''
+        Get today's driver routes
+    '''
+    #permission_classes = [isAdminPermission]
+    #authentication_classes = (JWTAuthentication,)
+
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        driver = self.kwargs.get('driver')
+        return Route.objects.filter(driver = driver, day__lte=datetime.today())
+
+class NextDriverRoutes(generics.ListAPIView):
+    '''
+        Get next driver's routes
+    '''
+    authentication_classes = (JWTAuthentication,)
+    serializer_class = routeSerializer
+
+    def get_queryset(self):
+        driver = self.kwargs.get('pk')
+        return Route.objects.filter(driver_id = driver, day__gte=datetime.today())
