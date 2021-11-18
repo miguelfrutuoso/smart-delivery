@@ -7,20 +7,19 @@ p {
 #oops {
     font-size: 100px;
     color: #41abd0;
-    position: absolute;
-    left: 50%;
+    position: relative;
     -webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
+    left: 50%;
+    top: 60%;
 }
 
 #st4 {
     font-size: 400px;
     color: #41abd0;
-    position: absolute;
-    left: 40%;
-    -webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-    top: 100px;
+    position: relative;
+    top: 15%;
+    left: 15%;
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -38,11 +37,9 @@ p {
 #nd4 {
     font-size: 400px;
     color: #41abd0;
-    position: absolute;
+    position: relative;
     left: 60%;
-    -webkit-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-    top: 100px;
+    top: 15%;
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -110,3 +107,4 @@ background-color: #e0efe3;
 left: 0;
 top: 27px;
 }
+

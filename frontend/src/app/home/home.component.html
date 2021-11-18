@@ -4,7 +4,7 @@
     </div>
     <div id="orders">
         <h1>Pending orders</h1>
-        <p *ngIf="orders.length == 0">No orders incoming</p> 
+        <p *ngIf="orders.length == 0">No orders pending were found</p> 
         
         <div id="order" *ngFor="let order of orders">
             <div id="order-id">
@@ -26,11 +26,24 @@
 
     <div id="orders">
         <h1>Incoming orders</h1>
+        <p *ngIf="distributionOrders.length == 0">No incoming orders were found</p>
+        <div id="order" *ngFor="let order of distributionOrders">
+            <div id="order-id">
+                <p>{{order.id}}</p>
+            </div>
+            <div id="product-description">
+                <p>{{order.description}}</p>
+            </div>
+            <div id="date-available">
+                <p>Delivered at:</p>
+                <p>{{order.date_delivery}}</p>    
+            </div>
+        </div>
     </div>
 
     <div id="orders">
         <h1>Past orders</h1>
-        <p *ngIf="recievedOrders.length == 0">No orders incoming</p>
+        <p *ngIf="recievedOrders.length == 0">No past orders were found</p>
         <div id="order" *ngFor="let order of recievedOrders">
             <div id="order-id">
                 <p>{{order.id}}</p>

@@ -19,25 +19,29 @@ export class HomeComponent implements OnInit {
 	loggedUser: User;
 
 	ngOnInit(): void {
-		this.getOrders()
-		this.getRecievedOrders()
+		
 		this.authService.getUserLogged().subscribe(
-			user => this.loggedUser = user
+			user => {
+				this.loggedUser = user
+				this.getOrders(user)
+				this.getRecievedOrders(user)
+				this.getDistributionOrders(user)
+			}
 		)
 	}
 
-	async getOrders() {
-		await this.orderService.getOrders(1) // TODO mudar para user logged
+	async getOrders(user: User) {
+		await this.orderService.getOrders(user.id) // TODO mudar para user logged
 			.subscribe(orders => this.orders = orders)
 		
 	}
 
-	async getRecievedOrders() {
+	async getRecievedOrders(user: User) {
 		await this.orderService.getUserRecievedOrders()
 			.subscribe(orders => this.recievedOrders = orders)
 	}
 
-	async getDistributionOrders() {
+	async getDistributionOrders(user: User) {
 		await this.orderService.getUserDistributionOrders()
 			.subscribe(orders => this.distributionOrders = orders)
 	}

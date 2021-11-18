@@ -38,9 +38,7 @@ export class AddOrderComponent implements OnInit {
 			}
 			config.outsideDays = 'hidden';
 	}
-
-	selectedNumber: number;
-
+	
 	addDelAdr: boolean;
 
 	customer: number;
@@ -56,7 +54,6 @@ export class AddOrderComponent implements OnInit {
 
 	locations: Location[];
 	//location: Location;
-	timings: timing[];
 	startTiming: Time;
 	endTiming: Time;
 	weight: number;
@@ -68,9 +65,6 @@ export class AddOrderComponent implements OnInit {
 	selectedWarehouse: number;
 
 	deliveryDate: NgbDate;
-	dateOptions = {
-
-	}
 
 	ngOnInit(): void {
 		//map initialization
@@ -102,16 +96,17 @@ export class AddOrderComponent implements OnInit {
 	}
 
 	async addLocation() { 
-		this.timings = [
+		
+		var timings = [
 			new timing(
 				this.datetimeToString(this.deliveryDate, this.startTiming),
 				this.datetimeToString(this.deliveryDate, this.endTiming),
 		)]
-		
+
 		var location = new Location(
-			this.marker.getLngLat().lat,
 			this.marker.getLngLat().lng,
-			this.timings
+			this.marker.getLngLat().lat,
+			timings
 		)
 		
 		this.geocodingService.getAddress(this.marker.getLngLat().lng, this.marker.getLngLat().lat) // Get place name 
@@ -123,7 +118,7 @@ export class AddOrderComponent implements OnInit {
 			}});
 		
 
-		if(this.timings != undefined){ // add new location to array of locations
+		if(timings != undefined){ // add new location to array of locations
 			this.locations.push(location)
 			this.changeDetection.detectChanges();
 		}	
@@ -140,14 +135,6 @@ export class AddOrderComponent implements OnInit {
 		}});
 
 		return address.features[0].place_name
-	}
-
-	locationExists(locations: Location[], location: Location) {
-		if (locations != undefined)
-			for(let i of Object.keys(locations))
-				if (locations[i].latitude == location.latitude && locations[i].longitude == location.longitude)
-					return true
-		return false
 	}
 
 	async addOrder() {
