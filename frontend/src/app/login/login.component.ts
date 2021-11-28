@@ -13,7 +13,7 @@ export class LoginComponent {
 
 	public user: User = new User;
 
-	constructor(private loginService: LoginService, private authService: AuthService, private router: Router) { }
+	constructor(private authService: AuthService, private router: Router) { }
 
 	ngOnInit() {
 		
