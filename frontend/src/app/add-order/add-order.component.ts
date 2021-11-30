@@ -14,6 +14,7 @@ import { GeocodingService } from '../services/geocoding/geocoding.service'
 import { OrderService } from '../services/order/order.service'
 import { GetUsersService } from '../services/get-users/get-users.service'
 import { WarehouseService } from '../services/warehouse/warehouse.service'
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-add-order',
@@ -28,8 +29,11 @@ export class AddOrderComponent implements OnInit {
 		private OrderService: OrderService,
 		private getUsersService: GetUsersService,
 		private warehouseService: WarehouseService,
-		private config: NgbDatepickerConfig) { 
-			
+		private config: NgbDatepickerConfig,
+		private router: Router) { 
+			this.retailer = null
+			this.customer = null
+			this.selectedWarehouse = null
 			var date = new Date();
 			config.minDate = {
 				year: date.getFullYear(),
@@ -95,6 +99,11 @@ export class AddOrderComponent implements OnInit {
 		await this.warehouseService.getWarehouses().subscribe(warehouses => this.warehouses = warehouses)
 	}
 
+	async getUsers(){
+		await this.getUsersService.getUsers()
+			.subscribe(users => this.users = users)
+	}
+
 	async addLocation() { 
 		
 		var timings = [
@@ -117,7 +126,6 @@ export class AddOrderComponent implements OnInit {
 				attribution: data.attribution
 			}});
 		
-
 		if(timings != undefined){ // add new location to array of locations
 			this.locations.push(location)
 			this.changeDetection.detectChanges();
@@ -146,15 +154,14 @@ export class AddOrderComponent implements OnInit {
 				this.weight,
 		 		this.locations,
 				this.description,
-				this.selectedWarehouse)).subscribe()
-		
+				this.selectedWarehouse)).subscribe(
+					(data) => {
+						this.router.navigate(['/admindashboard'])
+					}
+				)
 	}
 
-	async getUsers(){
-		await this.getUsersService.getUsers()
-			.subscribe(users => this.users = users)
-	}
-
+	
 	dateToString(date: NgbDate,){ // tranform NbgDate to String
 		return (date.year + '-' + date.month + '-' + date.day)
 	}

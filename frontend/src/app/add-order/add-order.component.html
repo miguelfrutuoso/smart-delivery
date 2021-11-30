@@ -6,19 +6,19 @@
         <form>
             <div>
                 <select [(ngModel)]="customer" name="customer">
-                    <option value="" disabled selected >Select customer</option>
+                    <option value="null" [disabled]="true">Select customer</option>
                     <option  *ngFor="let user of users" [value]="user.id">{{user.user_name}}</option>      
                 </select>
             </div>
             <div>
                 <select [(ngModel)]="retailer" required name="retailer">
-                    <option value="" disabled selected>Select retailer</option>
+                    <option [value]=null [disabled]="true">Select retailer</option>
                     <option *ngFor="let user of users" [value]="user.id">{{user.user_name}}</option>      
                 </select>
             </div>
             <div>
                 <select [(ngModel)]="selectedWarehouse" required name="selectedWarehouse">
-                    <option value="" disabled selected>Select warehouse</option>
+                    <option value="null" disabled="true">Select warehouse</option>
                     <option *ngFor="let warehouse of warehouses" [value]="warehouse.id">{{warehouse.name}}</option>      
                 </select>
             </div>
