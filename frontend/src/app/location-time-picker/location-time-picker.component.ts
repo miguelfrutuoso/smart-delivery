@@ -5,6 +5,7 @@ import { timing } from '../models/timing'
 import { Location } from '../models/location'
 import { Address } from '../models/address'
 import { GeocodingService } from '../services/geocoding/geocoding.service'
+import * as mapboxgl from 'mapbox-gl';
 
 @Component({
 	selector: 'app-location-time-picker',
@@ -21,6 +22,13 @@ export class LocationTimePickerComponent implements OnInit {
 	location: Location;
 	timings: timing[];
 	addressString: Address;
+
+
+	//map variables
+	map: mapboxgl.Map;
+	style = 'mapbox://styles/mapbox/streets-v11';
+	lat = 39.294580801281825;
+	lng = -7.4307729197902574;
 	marker: mapboxgl.Marker;
 
 	constructor(private changeDetection: ChangeDetectorRef,
@@ -28,6 +36,22 @@ export class LocationTimePickerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.locations = []
+
+		Object.getOwnPropertyDescriptor(mapboxgl, "accessToken").set('pk.eyJ1IjoibWlndWVsZnJ1dHVvc28iLCJhIjoiY2txdjljYWVpMDllNzJ6cDYzazg2dmhoZiJ9.2wSd1RH1bT_aKfCZaAdtVg');
+		this.map = new mapboxgl.Map({
+			container: 'map',
+			style: this.style,
+			zoom: 2,
+			center: [this.lng, this.lat]
+		});
+		// Add map controls
+		this.map.addControl(new mapboxgl.NavigationControl());
+		
+		this.marker = new mapboxgl.Marker({
+			color: "#FFFFFF",
+			draggable: true
+		}).setLngLat([this.lng, this.lat])
+			.addTo(this.map);
 	}
 
 	async taddLocation() { //Final version
