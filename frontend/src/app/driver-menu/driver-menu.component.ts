@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Subscription, timer } from 'rxjs';
 import { map, share } from 'rxjs/operators';
@@ -14,7 +15,7 @@ import { RouteService } from '../services/route/route.service';
 })
 export class DriverMenuComponent implements OnInit {
 
-	constructor(private authService: AuthService, private routeService: RouteService) { }
+	constructor(private authService: AuthService, private routeService: RouteService, private router: Router) { }
 
 	driver: User;
 	todayRoutes: Route[];
@@ -64,6 +65,10 @@ export class DriverMenuComponent implements OnInit {
 		this.routeService.getNextDriverRoute(driver).subscribe(
 			routes => this.nextRoutes = routes
 		)
+	}
+
+	test(){
+		
 	}
 
 }

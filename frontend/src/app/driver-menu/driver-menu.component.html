@@ -10,7 +10,7 @@
     
     <div class="routes">
         <h2>Today route</h2>
-        <div id="routes" *ngFor="let route of pastRoutes">
+        <div id="routes" *ngFor="let route of todayRoutes">
             <div class="table-header">
                 <table>
                     <thead>
@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th id="warehouse">Warehouse</th>
-                            <th id="time-to-stary">Time to start</th>
+                            <th id="time-to-stary">Start time</th>
                             <th id="start">Start</th>
                         </tr>
                     </thead>
@@ -53,6 +53,7 @@
                             <td>{{route.warehouse}}</td>
                             <td>{{route.day}}</td>
                             <td>{{route.start_time}}</td>
+                            <td id="view-route"><button class="button" id="viewroute"  [queryParams]="{id: route.id}" [routerLink]="'/route'"><span>Assign</span></button></td>
                         </tr>
                     </tbody> 
                 </table>
@@ -72,7 +73,7 @@
                     <thead>
                         <tr>
                             <th id="warehouse">Warehouse</th>
-                            <th id="time-to-stary">Time to start</th>
+                            <th id="time-to-stary">Start time</th>
                             <th id="start">Start</th>
                         </tr>
                     </thead>
@@ -81,6 +82,7 @@
                             <td>{{route.warehouse}}</td>
                             <td>{{route.day}}</td>
                             <td>{{route.start_time}}</td>
+                            <td id="view-route"><button class="button" id="viewroute"  [queryParams]="{id: route.id}" [routerLink]="'/route'"><span>Assign</span></button></td>
                         </tr>
                     </tbody> 
                 </table>
