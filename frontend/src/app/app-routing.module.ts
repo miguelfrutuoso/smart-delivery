@@ -35,7 +35,7 @@ const routes: Routes =  [
   { path: 'generate-route', component:GenerateRouteComponent, canActivate:[IsAdminGuard]},
   { path: 'dev-tools', component:DevToolsComponent, canActivate:[IsAdminGuard]},
   { path: 'random-data', component:RandomDataComponent, canActivate:[IsAdminGuard]},
-  { path: 'route', component:RouteComponent, canActivate:[IsAdminGuard]},
+  { path: 'route', component:RouteComponent},
   { path: 'admin-orders', component:AdminOrdersComponent, canActivate:[IsAdminGuard]},
   { path: 'admin-routes', component:AdminRoutesComponent, canActivate:[IsAdminGuard]},
   { path: 'recive-orders', component:RecieveOrdersComponent, canActivate:[IsAdminGuard]},
