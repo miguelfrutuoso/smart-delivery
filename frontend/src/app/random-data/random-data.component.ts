@@ -41,10 +41,10 @@ export class RandomDataComponent implements OnInit {
 
 				var times: Array<timing> = []
 
-				var startTiming: Time = this.randomTimeGenerator(t, 15)
+				var startTiming: Time = this.randomTimeGenerator(t, 11)
 					
 				var shft: Time = {
-					hours: startTiming.hours + 1,
+					hours: startTiming.hours + 5,
 					minutes: 0
 				}
 
