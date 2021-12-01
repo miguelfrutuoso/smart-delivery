@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import { Warehouse } from '../models/warehouse';
 import { WarehouseService } from '../services/warehouse/warehouse.service';
@@ -10,7 +11,7 @@ import { WarehouseService } from '../services/warehouse/warehouse.service';
 })
 export class CreateWarehouseComponent implements OnInit {
 
-	constructor(private warehouseService: WarehouseService) { }
+	constructor(private warehouseService: WarehouseService, private router: Router) { }
 
 	warehouse: Warehouse = new Warehouse; 
 
@@ -43,7 +44,13 @@ export class CreateWarehouseComponent implements OnInit {
 	createWarehouse() {
 		this.warehouse.latitude = this.lat;
 		this.warehouse.longitude = this.lng;
-		this.warehouseService.createWarehouse(this.warehouse).subscribe()
+		this.warehouseService.createWarehouse(this.warehouse).subscribe(
+			(data) => {
+				this.router.navigate(['/admin-dashboard'])
+			}
+		)
+			
+		
 	}
 
 }

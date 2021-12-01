@@ -156,7 +156,7 @@ export class AddOrderComponent implements OnInit {
 				this.description,
 				this.selectedWarehouse)).subscribe(
 					(data) => {
-						this.router.navigate(['/admindashboard'])
+						this.router.navigate(['/admin-dashboard'])
 					}
 				)
 	}
