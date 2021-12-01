@@ -18,7 +18,9 @@ export class GenerateRouteComponent implements OnInit {
 
 	constructor(private warehouseService: WarehouseService,
 				private orderService: OrderService,
-				private routeService: RouteService) { }
+				private routeService: RouteService) { 
+					this.selectedWarehouse = null
+				}
 
 	deliveryDate: NgbDate;
 
