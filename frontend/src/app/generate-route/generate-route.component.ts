@@ -41,7 +41,6 @@ export class GenerateRouteComponent implements OnInit {
 	}
 
 	getOrders() {
-		console.log(this.selectedWarehouse)
 		this.orderService.getOrdersByRangeTime(this.radius, this.selectedWarehouse, this.deliveryDate)
 		.subscribe(orders => this.orders = orders)
 	}

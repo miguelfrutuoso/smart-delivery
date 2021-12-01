@@ -84,9 +84,6 @@ export class LocationTimePickerComponent implements OnInit {
 				this.datetimeToString(this.deliveryDate, this.endTiming),
 			)]
 
-		console.log(this.timings)
-
-
 		this.location = new Location(
 			39.28915325077671,
 			-7.429216007254041,
@@ -98,11 +95,7 @@ export class LocationTimePickerComponent implements OnInit {
 			this.changeDetection.detectChanges();
 			console.log(this.locations.length)
 		}
-
-		console.log("LOCATIONS")
-		console.log(this.locations)
-
-		//await this.getLocationAddress(-7.429216007254041, 39.28915325077671)
+		
 	}
 
 	getLocationAddress(longitude: number, latitude: number) {

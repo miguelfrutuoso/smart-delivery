@@ -55,7 +55,6 @@ export class AdminRoutesComponent implements OnInit {
 				.subscribe(routes => this.routes = routes)
 		}
 		if (this.warehouse){
-			console.log(this.warehouse)
 			this.routeService.getFilteredRoutesByWarehouse(2)
 				.subscribe(routes => this.routes = routes)
 		}

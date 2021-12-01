@@ -65,7 +65,6 @@ export class RandomDataComponent implements OnInit {
 				"Random order",
 				1
 			)
-			console.log(order)
 			this.orderService.addOrder(order).subscribe()
 		}
 
