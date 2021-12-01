@@ -34,7 +34,6 @@ export class GenerateRouteComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getWarehouses()
-		
 	}
 
 	async getWarehouses() {
@@ -45,12 +44,10 @@ export class GenerateRouteComponent implements OnInit {
 		console.log(this.selectedWarehouse)
 		this.orderService.getOrdersByRangeTime(this.radius, this.selectedWarehouse, this.deliveryDate)
 		.subscribe(orders => this.orders = orders)
-		console.log(this.orders)
 	}
 
 	generateRoute() {
 		this.route = new Route()
-		console.log(this.orders)
 		this.route.orders = this.orders;
 		this.route.day = this.dateToString(this.deliveryDate);
 		this.route.start_time = this.startTime;
