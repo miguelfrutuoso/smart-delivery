@@ -166,7 +166,7 @@ class UpdateOrder(generics.UpdateAPIView):
 
 class GetOrdersByRangeTime(generics.ListAPIView):
     '''
-        Get orders given a datetime interval 
+        Get custumized orders given a datetime interval and a range between each order and the giver warehouse
     '''
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = (JWTAuthentication,)
@@ -177,7 +177,7 @@ class GetOrdersByRangeTime(generics.ListAPIView):
         
         date = self.kwargs.get('date')
         orders = Order.objects.filter(ordertimelocation__timeinterval__start__gte=make_aware(date), 
-            ordertimelocation__timeinterval__end__lte=make_aware(date + timedelta(days=1))).distinct()
+            ordertimelocation__timeinterval__end__lte=make_aware(date + timedelta(days=1)), state=Order.State.CUSTUMIZED).distinct()
         warehouse = self.kwargs.get('warehouse')
         range = self.kwargs.get('range')
         warehouse = Warehouse.objects.get(id = warehouse)
@@ -226,8 +226,6 @@ class AcceptOrder(generics.UpdateAPIView):
         order = self.kwargs.get('id')
         return HttpResponse(Order.objects.filter(id = order).update(state=Order.State.READYCTM, date_available=datetime.today()))
         
-#class PassToRCtoCS(generics.UpdateAPIView):
-
 
 #@periodic_task(run_every=(crontab(minute='*/15')), name="some_task", ignore_result=True)
 def ChangeToRCtoCS():
