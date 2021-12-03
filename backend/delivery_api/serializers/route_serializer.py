@@ -27,9 +27,7 @@ class routeSerializer(serializers.ModelSerializer):
         warehouse = {}
         warehouse['latitude'] = getattr(route_subset['warehouse'], 'latitude')
         warehouse['longitude'] = getattr(route_subset['warehouse'], 'longitude')
-        
-        print(len(validated_data['orders']))
-        
+            
         idx = 0
 
         for order_data in validated_data['orders']: #build orders with otl's array
@@ -41,18 +39,24 @@ class routeSerializer(serializers.ModelSerializer):
 
             orders.append(order)
 
+        opt_route = vrptw_optimized(orders, 420, warehouse)
+
         combinations = []
 
         for combination in product(*orders): #Build all cominations possible
             combinations.append(combination)
 
-        opt_route = vrptw(combinations, 420, warehouse)
-        print(opt_route)
+        print(len(combinations))
+
+        #opt_route = vrptw(combinations, 420, warehouse)
+
+        print(opt_route['route'])
+
         for idx, order in enumerate(opt_route['route']):
             if (idx != 0):
                 Order.objects.filter(id=order['order_id']).update(route=route, state=Order.State.READYDIS)
                 orderTimelocation.objects.filter(id=order['id']).update(selected=True, nth_order=idx)
-        #vrptw_optimized(orders)
+        
         return route
       
 

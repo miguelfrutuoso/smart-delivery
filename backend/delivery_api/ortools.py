@@ -4,6 +4,7 @@ import requests
 import sys
 import random
 import math
+import os
 
 class Location:
     def __init__(self, longitude, latitude, timing):
@@ -18,12 +19,11 @@ class Timing:
 
 def solve(data):
     """Solve the VRP with time windows."""
-    # Instantiate the data problem. OK
+    # Instantiate the data problem. 
     #data = create_data_model()
 
-    # Create the routing index manager. OK+/-
-    manager = pywrapcp.RoutingIndexManager(
-        len(data['time_matrix']), data['num_vehicles'], data['depot'])
+    # Create the routing index manager. 
+    manager = pywrapcp.RoutingIndexManager(len(data['time_matrix']), data['num_vehicles'], data['depot'])
 
     # Create Routing Model.
     routing = pywrapcp.RoutingModel(manager)
@@ -47,7 +47,7 @@ def solve(data):
     routing.AddDimension(
         transit_callback_index,
         310,  # allow waiting time
-        10000,  # maximum time per vehicle
+        840,  # maximum time per vehicle
         False,  # Don't force start cumul to zero.
         time)
     time_dimension = routing.GetDimensionOrDie(time)
@@ -56,7 +56,6 @@ def solve(data):
         if location_idx == data['depot']:
             continue
         index = manager.NodeToIndex(location_idx)
-        print("time_window", time_window[0])
         time_dimension.CumulVar(index).SetMin(time_window[0])
         time_dimension.CumulVar(index).SetMax(time_window[1])
         #time_dimension.CumulVar(index).SetRange(time_window[0], time_window[1])
@@ -79,6 +78,10 @@ def solve(data):
 
     search_parameters.first_solution_strategy = (
         routing_enums_pb2.FirstSolutionStrategy.PATH_CHEAPEST_ARC)
+    
+    # search_parameters.local_search_metaheuristic = (
+    # routing_enums_pb2.LocalSearchMetaheuristic.SIMULATED_ANNEALING)
+
 
     # Solve the problem.
     solution = routing.SolveWithParameters(search_parameters)
@@ -155,7 +158,7 @@ def build_request_string(locations):
         request_string += str(location['longitude']) + \
             ',' + str(location['latitude'])
         if location == locations[-1]:
-            request_string += '?access_token=pk.eyJ1IjoibWlndWVsZnJ1dHVvc28iLCJhIjoiY2txdjljYWVpMDllNzJ6cDYzazg2dmhoZiJ9.2wSd1RH1bT_aKfCZaAdtVg'
+            request_string += '?access_token=pk.eyJ1IjoibWlndWVsZnJ0IiwiYSI6ImNrd2p2Mm96ZjFhZDEyb3BidHVnczU2bmIifQ.XR1HKbAO97dW4SkimuP05g'
         else:
             request_string += ';'
 
@@ -168,7 +171,7 @@ def time_matrix_sec_to_hour(time_matrix):
     '''
     for i in range(len(time_matrix)):
         for j in range(len(time_matrix[i])):
-            time_matrix[i][j] = time_matrix[i][j] / 3600
+            time_matrix[i][j] = time_matrix[i][j] / 60
 
     return time_matrix
 
@@ -182,6 +185,11 @@ def vrptw(combinations, start_time, starting_point):
     best_solution['total_time'] = sys.maxsize
     best_solution['route'] = []
     
+    i = 0
+    while os.path.exists("../testes_comb/comb%s.txt" % i): # create file for performance analysis
+        i += 1
+    new_file = open("../testes_comb/comb%s.txt" % i, "w")
+
     for combination in combinations:
 
         data = {}
@@ -203,62 +211,97 @@ def vrptw(combinations, start_time, starting_point):
             best_solution = solution
             best_solution['route'] = order_combination(combination, solution['route'])
             best_solution['total_time'] = solution['total_time']
+            new_file.write("%s\n" %best_solution['total_time'])
+    
+    new_file.close()
 
-        print(best_solution)
-        break
-
-        
 
     return best_solution
 
-def vrptw_optimized(array, start_time):
+
+def vrptw_optimized(array, start_time, starting_point):
     ''' 
         Calculates the best route given a list of orders with 1 or more delivery options (OTL)
         Simulated annealing will try to find the best combination of OTL
     '''
+    total_runtime = 0
 
-    
-    temperature = 40
-    final_temperature = .1
-    alpha = 0.5
+    temperature = 5
+    final_temperature = .5
+    alpha = 0.05
     current_state, current_state_idx = rand_pick_2d_array(array) # Set random initial state & current_state_idx is an array of selected indexes of the array
-    current_state_cost = formulate_problem(current_state) # cost of current state
+    print("START SOLVING PROBLEM")
+    current_state_solved = formulate_problem(current_state, start_time, starting_point) # cost of current state
+    print("END SOLVING PROBLEM")
+    current_state_cost = current_state_solved['total_time']
+
+    best_state, best_state_idx, best_state_cost = current_state, current_state_idx, current_state_cost
+    
+    i = 0
+    while os.path.exists("../testes/sim_an%s.txt" % i): # create file for performance analysis
+        i += 1
+    new_file = open("../testes/sim_an%s.txt" % i, "w")
 
     while(1):
-
-        #next_state = rand_pick_2d_array(array) # Pick a random next state 
-
-        next_state = pick_neighbor(array, current_state_idx) # Pick a neighbor
-        next_state_cost = formulate_problem(next_state) # Cost of next state
+        next_state, next_state_idx = pick_neighbor(array, current_state_idx) # Pick a neighbor
+        print("CURRENT STATE ID'S")
+        print(current_state_idx)
+        print("START SOLVING PROBLEM")
+        next_state_solved = formulate_problem(next_state, start_time, starting_point) # solve next_state
+        print("END SOLVING PROBLEM")
+        next_state_cost = next_state_solved['total_time'] # Cost of next state
 
         cost_diff = next_state_cost - current_state_cost # Cost difference between next and current state
 
-        if cost_diff > 0: # If next_state has less cost than current_state accept it
-            current_state = next_state
+        print("CURRENT COST", current_state_cost)
+        print("NEXT COST", next_state_cost)
+
+
+
+        if cost_diff < 0: # If next_state has less cost than current_state accept it
+            print("||NEXT COST ACCEPTED||")
+            current_state, current_state_idx, current_state_cost = next_state, next_state_idx, next_state_cost
+            cost_diff_best = current_state_cost - best_state_cost  
+            if cost_diff_best < 0:
+                best_state, best_state_idx, best_state_cost = current_state, current_state_idx, current_state_cost
+                print("BEST STATE CHANGED with cost ", best_state_cost)
         else: # If not accept it with a given probability
             if random.uniform(0, 1) < math.exp(-cost_diff /temperature):
-                current_state = next_state
+                current_state, current_state_idx, current_state_cost = next_state, next_state_idx, next_state_cost
+
+        new_file.write("%s\n" %current_state_cost)
 
         temperature -= alpha # cool down
-
         if temperature <= final_temperature: # final temperature
-            return current
+            print("bets state", best_state_cost)
+            print("current state", current_state_cost)
+            if best_state_cost < current_state_cost:
+                current_state, current_state_idx, current_state_cost = best_state, best_state_idx, best_state_cost
+                new_file.write("%s\n" %current_state_cost)
+            break
 
-        current = rand_pick_2d_array(array) # select random successor
+    best_solution = {}
+    best_solution['route'] = order_combination(current_state, current_state_idx)
+    best_solution['total_time'] = current_state_cost
+
+    new_file.close()
+
+    return best_solution
+
     
 
 def pick_neighbor(array, idx_array): # Pick a neighbor 
 
     neighbor = []
 
-    change_id = random.uniform(0, len(array) - 1) # choice random element to change 
+    change_id = random.randint(0, len(array) - 1) # choice random element to change 
 
     while (len(array[change_id]) == 1): # if the element has 1 of length repeat random choice
-        change_id = random.uniform(0, len(array) - 1)
+        change_id = random.randint(0, len(array) - 1)
 
-    for i, idx in array:
+    for idx, i in enumerate(array):
         if idx == change_id: 
-            element = random.uniform(0, len(i))
+            element = random.randint(0, len(i) - 1)
             idx_array[idx] = element # change idx array 
             neighbor.append(i[element]) # change random element
         else:
@@ -266,17 +309,22 @@ def pick_neighbor(array, idx_array): # Pick a neighbor
 
     return neighbor, idx_array
 
-def formulate_problem(combination, start_time): 
+def formulate_problem(combination, start_time, starting_point): 
     '''
         formulate a VRPTW problem
     '''
     data = {}
 
+    combination = (starting_point,) + tuple(combination)
+
     data['time_matrix'] = get_time_matrix(combination)    
     data['time_windows'] = [(0, 60)]
 
-    for location in combination:
+    for location in combination[1:]: # skip depot
         data['time_windows'].append(shift_timeinterval(location['timeinterval'], start_time))
+
+    data['num_vehicles'] = 1
+    data['depot'] = 0   
 
     return solve(data)
 
@@ -306,7 +354,6 @@ def order_combination(orders, solution):
     """
     ordered_combination = []
     for pos in solution:
-        print(pos)
         ordered_combination.append(orders[pos])
 
     return ordered_combination
